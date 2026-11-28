@@ -95,6 +95,7 @@ class AppServices {
     this.prayerSettingsRepository,
     this.prayerSettings,
     this.themeMode,
+    this.locale,
     this.location,
     this.adhanSettings,
     this.adhkarReminders,
@@ -105,6 +106,7 @@ class AppServices {
   );
 
   static const themeKey = 'ui.theme';
+  static const localeKey = 'ui.locale';
   static const defaultReciterKey = 'audio.defaultReciter';
 
   final AppDatabase database;
@@ -116,6 +118,7 @@ class AppServices {
   final PrayerSettingsRepository prayerSettingsRepository;
   final ValueNotifier<PrayerSettings> prayerSettings;
   final ValueNotifier<ThemeMode> themeMode;
+  final ValueNotifier<Locale> locale;
   final LocationService location;
   final AdhanSettingsRepository adhanSettings;
   final AdhkarReminderRepository adhkarReminders;
@@ -137,6 +140,9 @@ class AppServices {
 
   static ThemeMode themeModeFrom(String? raw) =>
       raw == 'light' ? ThemeMode.light : ThemeMode.dark;
+
+  static Locale localeFrom(String? raw) =>
+      raw == 'en' ? const Locale('en') : const Locale('ar');
 
   static AppServices? _current;
 
@@ -163,6 +169,7 @@ class AppServices {
       final settingsRepository = PrayerSettingsRepository(db);
       final settings = await settingsRepository.load();
       final theme = themeModeFrom(await SettingsStore.read(db, themeKey));
+      final locale = localeFrom(await SettingsStore.read(db, localeKey));
       final prayerLog = DriftPrayerLogRepository(db);
       final prayerSettings = ValueNotifier(settings);
       final services = AppServices._(
@@ -175,6 +182,7 @@ class AppServices {
         settingsRepository,
         prayerSettings,
         ValueNotifier(theme),
+        ValueNotifier(locale),
         location ?? LocationService(),
         AdhanSettingsRepository(db),
         AdhkarReminderRepository(db),
@@ -229,11 +237,19 @@ class AppServices {
     );
   }
 
+  Future<void> setLocale(Locale next) async {
+    final languageCode = next.languageCode == 'en' ? 'en' : 'ar';
+    final normalized = Locale(languageCode);
+    await SettingsStore.write(database, localeKey, languageCode);
+    locale.value = normalized;
+  }
+
   static Future<void> shutdown() async {
     final services = _current;
     _current = null;
     services?.prayerSettings.dispose();
     services?.themeMode.dispose();
+    services?.locale.dispose();
     services?._playback?.dispose();
     await services?.database.close();
   }

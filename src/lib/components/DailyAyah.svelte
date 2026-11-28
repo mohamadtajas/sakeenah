@@ -24,26 +24,26 @@
 </script>
 
 {#if ayah}
-  <section class="mt-4 overflow-hidden rounded-2xl border border-line bg-ink-900/60">
+  <section class="card mt-4 overflow-hidden rounded-2xl">
     <div class="flex items-center justify-between gap-3 border-b border-line/60 px-4 py-2.5">
-      <span class="flex items-center gap-2 text-[11px] font-semibold text-gold">
+      <span class="flex items-center gap-2 text-[11px] font-semibold text-accent-ink">
         <Icon name="bookOpen" size={13} />
         {i18n.t("reader.daily")}
       </span>
       <button
         type="button"
         onclick={open}
-        class="rounded-lg border border-line px-2.5 py-1 text-[10px] text-muted transition-colors hover:border-gold/40 hover:text-gold"
+        class="rounded-lg border border-line px-2.5 py-1 text-[10px] text-muted transition-colors hover:border-primary/40 hover:text-primary"
       >
         {i18n.t("reader.openInReader")}
       </button>
     </div>
 
-    <button type="button" onclick={open} class="block w-full px-5 py-5 text-center hover:bg-ink-850/40">
+    <button type="button" onclick={open} class="block w-full px-5 py-5 text-center transition-colors hover:bg-primary-soft/30">
       <p
         dir="rtl"
         lang="ar"
-        class="mx-auto line-clamp-4 max-w-3xl font-quran text-[1.2rem] leading-[1.95] text-cream"
+        class="mx-auto line-clamp-4 max-w-3xl font-quran text-[1.2rem] leading-[2.05] text-text"
       >
         {ayah.text}
       </p>

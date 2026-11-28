@@ -24,12 +24,16 @@ class SettingsPage extends StatefulWidget {
     required this.themeMode,
     required this.onThemeChanged,
     required this.location,
+    this.locale = const Locale('ar'),
+    this.onLocaleChanged,
     this.adhanScheduler,
   });
 
   final ThemeMode themeMode;
   final ValueChanged<ThemeMode> onThemeChanged;
   final LocationService location;
+  final Locale locale;
+  final ValueChanged<Locale>? onLocaleChanged;
   final AdhanScheduler? adhanScheduler;
 
   @override
@@ -38,6 +42,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   late ThemeMode _mode = widget.themeMode;
+  late Locale _locale = widget.locale;
   late final AppServices _services = AppServices.current;
   late PrayerSettings _settings = _services.prayerSettings.value;
   late final TextEditingController _latitude = TextEditingController(
@@ -100,6 +105,12 @@ class _SettingsPageState extends State<SettingsPage> {
     _latitude.dispose();
     _longitude.dispose();
     super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant SettingsPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.locale != widget.locale) _locale = widget.locale;
   }
 
   List<String> _buildTimezones() {
@@ -1078,6 +1089,28 @@ class _SettingsPageState extends State<SettingsPage> {
                   },
                 ),
               ],
+            ),
+          ),
+          const SizedBox(height: 14),
+          _SectionCard(
+            title: l10n.languageSection,
+            child: SegmentedButton<Locale>(
+              segments: [
+                ButtonSegment(
+                  value: const Locale('ar'),
+                  label: Text(l10n.languageArabic),
+                ),
+                ButtonSegment(
+                  value: const Locale('en'),
+                  label: Text(l10n.languageEnglish),
+                ),
+              ],
+              selected: {_locale},
+              onSelectionChanged: (selection) {
+                final next = selection.first;
+                setState(() => _locale = next);
+                widget.onLocaleChanged?.call(next);
+              },
             ),
           ),
           const SizedBox(height: 14),

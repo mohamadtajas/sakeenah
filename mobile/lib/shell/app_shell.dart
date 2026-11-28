@@ -19,10 +19,14 @@ class AppShell extends StatefulWidget {
     super.key,
     required this.themeMode,
     required this.onThemeChanged,
+    required this.locale,
+    required this.onLocaleChanged,
   });
 
   final ThemeMode themeMode;
   final ValueChanged<ThemeMode> onThemeChanged;
+  final Locale locale;
+  final ValueChanged<Locale> onLocaleChanged;
 
   @override
   State<AppShell> createState() => _AppShellState();
@@ -145,6 +149,27 @@ class _AppShellState extends State<AppShell> {
       appBar: AppBar(
         title: Text(titles[_index]),
         actions: [
+          Tooltip(
+            message: widget.locale.languageCode == 'ar'
+                ? l10n.languageEnglish
+                : l10n.languageArabic,
+            child: TextButton(
+              key: const ValueKey('language-toggle'),
+              onPressed: () => widget.onLocaleChanged(
+                widget.locale.languageCode == 'ar'
+                    ? const Locale('en')
+                    : const Locale('ar'),
+              ),
+              child: Text(
+                widget.locale.languageCode == 'ar' ? 'EN' : 'عربي',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ),
+          ),
           IconButton(
             tooltip: l10n.settings,
             icon: const Icon(Icons.settings_outlined),
@@ -153,6 +178,8 @@ class _AppShellState extends State<AppShell> {
                 builder: (_) => SettingsPage(
                   themeMode: widget.themeMode,
                   onThemeChanged: widget.onThemeChanged,
+                  locale: widget.locale,
+                  onLocaleChanged: widget.onLocaleChanged,
                   location: AppServices.current.location,
                 ),
               ),

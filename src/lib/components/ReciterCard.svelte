@@ -22,14 +22,14 @@
       rounded="rounded-2xl"
     />
     <div
-      class="absolute inset-0 grid place-items-center rounded-2xl bg-ink-950/45 opacity-0 transition-opacity group-hover:opacity-100"
+      class="absolute inset-0 grid place-items-center rounded-2xl bg-canvas/40 opacity-0 transition-opacity group-hover:opacity-100"
     >
-      <span class="grid size-9 place-items-center rounded-full bg-gold text-ink-950">
+      <span class="grid size-9 place-items-center rounded-full bg-accent text-canvas shadow-card">
         <svg width="14" height="14" viewBox="0 0 24 24" class="ms-0.5" fill="currentColor"><path d="M7 3.8v16.4L20 12z" /></svg>
       </span>
     </div>
   </div>
-  <div class="mt-2 truncate text-[0.85rem] font-medium text-cream group-hover:text-gold">
+  <div class="mt-2 truncate text-[0.85rem] font-medium text-text group-hover:text-primary">
     {reciter.name}
   </div>
   <div class="truncate text-[11px] text-muted">{reciter.moshafs[0]?.name ?? ""}</div>

@@ -125,10 +125,10 @@
 
 <div class="fade-in">
   <header>
-    <p class="text-[10px] font-bold uppercase tracking-[0.22em] text-gold/80">
+    <p class="text-[10px] font-bold uppercase tracking-[0.22em] text-accent-ink">
       {i18n.t("explore.sources")}
     </p>
-    <h1 class="mt-1 text-2xl font-bold text-cream">{i18n.t("explore.title")}</h1>
+    <h1 class="mt-1 text-2xl font-bold text-text">{i18n.t("explore.title")}</h1>
     <p class="mt-1 max-w-2xl text-xs leading-relaxed text-muted">{i18n.t("explore.note")}</p>
   </header>
 
@@ -137,10 +137,8 @@
       <button
         type="button"
         onclick={() => (section = item.id)}
-        class="rounded-full border px-3 py-1.5 text-[11px] transition-colors
-               {section === item.id
-          ? 'border-gold/50 bg-gold/12 text-gold'
-          : 'border-line text-muted hover:border-gold/30 hover:text-cream'}"
+        class="chip"
+        data-active={section === item.id ? "true" : "false"}
       >
         {i18n.t(item.label)}
       </button>
@@ -148,20 +146,20 @@
   </div>
 
   <label
-    class="mt-4 flex max-w-lg items-center gap-2 rounded-xl border border-line bg-ink-850 px-3 py-2 focus-within:border-gold/50"
+    class="field mt-4 max-w-lg"
   >
     <Icon name="search" size={15} class="text-muted" />
     <input
       bind:value={term}
       aria-label={i18n.t("explore.placeholder")}
       placeholder={i18n.t("explore.placeholder")}
-      class="w-full bg-transparent text-sm text-cream placeholder:text-muted/70 focus:outline-none"
+      class="w-full bg-transparent text-sm text-text placeholder:text-muted/70 focus:outline-none"
     />
     {#if term}
       <button
         type="button"
         onclick={() => (term = "")}
-        class="rounded p-0.5 text-muted hover:text-cream"
+        class="rounded p-0.5 text-muted hover:text-text"
         aria-label={i18n.t("common.close")}
       >
         <Icon name="x" size={13} />
@@ -174,37 +172,37 @@
       <div class="space-y-1">
         {#each Array(7) as _, i (i)}
           <div class="flex animate-pulse items-center gap-3 px-2.5 py-2">
-            <div class="size-11 rounded-lg bg-ink-800"></div>
-            <div class="h-3 w-56 rounded bg-ink-800"></div>
+            <div class="size-11 rounded-lg bg-primary-soft"></div>
+            <div class="h-3 w-56 rounded bg-primary-soft"></div>
           </div>
         {/each}
       </div>
       <p class="mt-3 text-center text-[11px] text-muted">{i18n.t("explore.loading")}</p>
     {:else if failed}
-      <div class="rounded-2xl border border-line bg-ink-900/50 px-6 py-14 text-center">
-        <Icon name="globe" size={28} class="mx-auto text-ink-700" />
+      <div class="card rounded-2xl px-6 py-14 text-center">
+        <Icon name="globe" size={28} class="mx-auto text-muted" />
         <p class="mt-3 text-sm text-muted">{i18n.t("explore.error")}</p>
         <button
           type="button"
           onclick={retry}
-          class="mt-4 rounded-lg border border-line px-3 py-1.5 text-xs text-cream transition-colors hover:border-gold/40 hover:text-gold"
+          class="btn btn-outline mt-4"
         >
           {i18n.t("common.retry")}
         </button>
       </div>
     {:else if tracks.length === 0}
-      <div class="rounded-2xl border border-line bg-ink-900/50 px-6 py-14 text-center">
-        <Icon name="sparkle" size={28} class="mx-auto text-ink-700" />
+      <div class="card rounded-2xl px-6 py-14 text-center">
+        <Icon name="sparkle" size={28} class="mx-auto text-muted" />
         <p class="mt-3 text-sm text-muted">{i18n.t("explore.empty")}</p>
       </div>
     {:else}
       {#if streaming}
         <div class="mb-2 flex items-center gap-2 px-1 text-[11px] text-muted">
-          <span class="size-3 animate-spin rounded-full border border-gold/30 border-t-gold"></span>
+          <span class="size-3 animate-spin rounded-full border border-accent/30 border-t-accent"></span>
           {i18n.t("explore.loadingMore")}
         </div>
       {/if}
-      <div class="overflow-hidden rounded-2xl border border-line bg-ink-900/50 p-1.5">
+      <div class="card overflow-hidden rounded-2xl p-1.5">
         {#each tracks as track (track.id)}
           <TrackRow {track} queue={tracks} />
         {/each}

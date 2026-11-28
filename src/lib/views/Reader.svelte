@@ -190,19 +190,19 @@
 <div class="fade-in">
   <header class="flex flex-wrap items-start justify-between gap-4">
     <div>
-      <p class="text-[10px] font-bold uppercase tracking-[0.24em] text-gold/80">{i18n.t("app.name")}</p>
-      <h1 class="mt-1 text-2xl font-bold text-cream">{i18n.t("reader.title")}</h1>
+      <p class="text-[10px] font-bold uppercase tracking-[0.24em] text-accent-ink">{i18n.t("app.name")}</p>
+      <h1 class="mt-1 text-2xl font-bold text-text">{i18n.t("reader.title")}</h1>
       <p class="mt-1 text-sm text-muted">{i18n.t("reader.subtitle")}</p>
     </div>
 
     <div class="flex flex-wrap items-center gap-2">
-      <div class="flex items-center gap-1 rounded-xl border border-line bg-ink-850 p-1">
+      <div class="flex items-center gap-1 rounded-xl border border-line bg-surface p-1 shadow-card">
         <button
           type="button"
           onclick={() => reader.setFontSize(reader.fontSize - 2)}
           disabled={reader.fontSize <= 20}
           aria-label={i18n.t("reader.fontSmaller")}
-          class="grid size-8 place-items-center rounded-lg text-sm font-semibold text-muted transition-colors hover:bg-ink-800 hover:text-cream disabled:opacity-35"
+          class="grid size-8 place-items-center rounded-lg text-sm font-semibold text-muted transition-colors hover:bg-primary-soft/60 hover:text-primary disabled:opacity-35"
         >
           أ−
         </button>
@@ -214,7 +214,7 @@
           onclick={() => reader.setFontSize(reader.fontSize + 2)}
           disabled={reader.fontSize >= 48}
           aria-label={i18n.t("reader.fontLarger")}
-          class="grid size-8 place-items-center rounded-lg text-base font-semibold text-muted transition-colors hover:bg-ink-800 hover:text-cream disabled:opacity-35"
+          class="grid size-8 place-items-center rounded-lg text-base font-semibold text-muted transition-colors hover:bg-primary-soft/60 hover:text-primary disabled:opacity-35"
         >
           أ+
         </button>
@@ -227,17 +227,17 @@
         onclick={() => reader.setTranslation(!reader.translation)}
         class="flex items-center gap-2 rounded-xl border px-3 py-2 text-xs transition-colors
                {reader.translation
-          ? 'border-gold/50 bg-gold/10 text-gold'
-          : 'border-line bg-ink-850 text-muted hover:border-gold/40 hover:text-gold'}"
+          ? 'border-primary/40 bg-primary-soft font-semibold text-primary'
+          : 'border-line bg-surface text-muted hover:border-primary/35 hover:text-primary'}"
       >
         <Icon name="globe" size={14} />
         {i18n.t("reader.translation")}
         <span
           class="relative h-4 w-7 rounded-full border transition-colors
-                 {reader.translation ? 'border-gold/60 bg-gold/70' : 'border-line bg-ink-800'}"
+                 {reader.translation ? 'border-primary/60 bg-primary/70' : 'border-line bg-raised'}"
         >
           <span
-            class="absolute top-[1px] size-3 rounded-full bg-cream transition-all
+            class="absolute top-[1px] size-3 rounded-full bg-surface transition-all
                    {reader.translation ? 'start-[11px]' : 'start-[2px]'}"
           ></span>
         </span>
@@ -246,14 +246,14 @@
   </header>
 
   <div class="mt-5 grid gap-4 lg:grid-cols-[250px_minmax(0,1fr)]">
-    <aside class="rounded-2xl border border-line bg-ink-900/60 p-3 lg:sticky lg:top-0 lg:max-h-[calc(100vh-9rem)] lg:self-start">
-      <div class="grid grid-cols-3 gap-1 rounded-xl bg-ink-850 p-1">
+    <aside class="card rounded-2xl p-3 lg:sticky lg:top-0 lg:max-h-[calc(100vh-9rem)] lg:self-start">
+      <div class="grid grid-cols-3 gap-1 rounded-xl bg-canvas p-1">
         {#each tabs as entry (entry.id)}
           <button
             type="button"
             onclick={() => (tab = entry.id)}
             class="flex items-center justify-center gap-1 rounded-lg px-1 py-2 text-[11px] transition-colors
-                   {tab === entry.id ? 'bg-ink-700 font-semibold text-gold' : 'text-muted hover:text-cream'}"
+                   {tab === entry.id ? 'bg-primary-soft font-semibold text-primary' : 'text-muted hover:text-text'}"
           >
             <Icon name={entry.icon} size={12} />
             {i18n.t(entry.label)}
@@ -262,20 +262,20 @@
       </div>
 
       {#if reader.indexError}
-        <p class="mt-2 rounded-lg border border-gold/30 bg-gold/[0.05] px-2.5 py-2 text-[10px] leading-relaxed text-gold">
+        <p class="mt-2 rounded-lg border border-accent/30 bg-accent/5 px-2.5 py-2 text-[10px] leading-relaxed text-accent-ink">
           {i18n.t(reader.indexError as TranslationKey)}
         </p>
       {/if}
 
       <div class="mt-3 max-h-[42vh] overflow-y-auto pe-1 lg:max-h-[62vh]">
         {#if tab === "surahs"}
-          <label class="flex items-center gap-2 rounded-lg border border-line bg-ink-850 px-2.5 py-1.5 focus-within:border-gold/40">
+          <label class="field px-2.5 py-1.5">
             <Icon name="search" size={13} class="shrink-0 text-muted" />
             <input
               bind:value={query}
               placeholder={i18n.t("reader.search")}
               aria-label={i18n.t("reader.search")}
-              class="w-full bg-transparent text-[11px] text-cream placeholder:text-muted focus:outline-none"
+              class="w-full bg-transparent text-[11px] text-text placeholder:text-muted focus:outline-none"
             />
           </label>
 
@@ -286,7 +286,7 @@
                 type="button"
                 onclick={() => openSurah(surah.number)}
                 class="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-start transition-colors
-                       {active ? 'bg-gold/10 text-gold' : 'text-muted hover:bg-ink-800 hover:text-cream'}"
+                       {active ? 'bg-primary-soft text-primary' : 'text-muted hover:bg-primary-soft/40 hover:text-text'}"
               >
                 <span class="w-6 shrink-0 text-[10px] tabular-nums opacity-70">
                   {fmtNumber(surah.number)}
@@ -308,7 +308,7 @@
                 type="button"
                 onclick={() => openJuz(juz.number)}
                 class="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-start transition-colors
-                       {active ? 'bg-gold/10 text-gold' : 'text-muted hover:bg-ink-800 hover:text-cream'}"
+                       {active ? 'bg-primary-soft text-primary' : 'text-muted hover:bg-primary-soft/40 hover:text-text'}"
               >
                 <span class="grid size-7 shrink-0 place-items-center rounded-full border border-line/70 text-[10px] tabular-nums">
                   {fmtNumber(juz.number)}
@@ -333,13 +333,13 @@
         {:else}
           <div class="space-y-0.5">
             {#each reader.bookmarks as bookmark (`${bookmark.surah}:${bookmark.ayah}`)}
-              <div class="flex items-center gap-1 rounded-lg transition-colors hover:bg-ink-800">
+              <div class="flex items-center gap-1 rounded-lg transition-colors hover:bg-primary-soft/40">
                 <button
                   type="button"
                   onclick={() => openBookmark(bookmark)}
-                  class="flex min-w-0 flex-1 items-center gap-2 px-2 py-2 text-start text-muted hover:text-cream"
+                  class="flex min-w-0 flex-1 items-center gap-2 px-2 py-2 text-start text-muted hover:text-text"
                 >
-                  <Icon name="bookmarkFilled" size={12} class="shrink-0 text-gold" />
+                  <Icon name="bookmarkFilled" size={12} class="shrink-0 text-accent-ink" />
                   <span class="min-w-0 flex-1 truncate text-[12px]">
                     {surahName(bookmark.surah)}
                   </span>
@@ -351,7 +351,7 @@
                   type="button"
                   onclick={() => reader.toggleBookmark(bookmark.surah, bookmark.ayah)}
                   aria-label={i18n.t("reader.bookmarkRemove")}
-                  class="me-1 grid size-6 shrink-0 place-items-center rounded text-muted hover:text-gold"
+                  class="me-1 grid size-6 shrink-0 place-items-center rounded text-muted hover:text-red-500"
                 >
                   <Icon name="x" size={11} />
                 </button>
@@ -364,7 +364,7 @@
 
     <section class="min-w-0">
       {#if reader.error}
-        <div class="mb-3 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-gold/30 bg-gold/[0.05] px-3 py-2 text-[11px] text-gold">
+        <div class="mb-3 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-accent/30 bg-accent/5 px-3 py-2 text-[11px] text-accent-ink">
           <span>{i18n.t("reader.error")}</span>
           <button type="button" onclick={() => reader.reload()} class="font-semibold underline">
             {i18n.t("reader.retry")}
@@ -373,11 +373,11 @@
       {/if}
 
       {#if reader.translation && reader.translationLoading}
-        <p class="mb-3 rounded-xl border border-line bg-ink-900/60 px-3 py-2 text-[11px] text-muted">
+        <p class="mb-3 rounded-xl border border-line bg-surface px-3 py-2 text-[11px] text-muted">
           {i18n.t("reader.translationLoading")}
         </p>
       {:else if reader.translation && reader.ayahs.length && !reader.ayahs.some((ayah) => ayah.translation)}
-        <p class="mb-3 rounded-xl border border-line bg-ink-900/60 px-3 py-2 text-[11px] text-muted">
+        <p class="mb-3 rounded-xl border border-line bg-surface px-3 py-2 text-[11px] text-muted">
           {i18n.t("reader.translationUnavailable")}
         </p>
       {/if}
@@ -385,18 +385,18 @@
       {#if reader.loading}
         <div class="space-y-3">
           {#each Array(5) as _, index (index)}
-            <div class="animate-pulse rounded-xl bg-ink-900 p-5">
-              <div class="h-4 w-2/3 rounded bg-ink-800"></div>
-              <div class="mt-3 h-4 w-full rounded bg-ink-800"></div>
-              <div class="mt-2 h-4 w-4/5 rounded bg-ink-800"></div>
+            <div class="animate-pulse rounded-xl border border-line bg-surface p-5">
+              <div class="h-4 w-2/3 rounded bg-primary-soft"></div>
+              <div class="mt-3 h-4 w-full rounded bg-primary-soft"></div>
+              <div class="mt-2 h-4 w-4/5 rounded bg-primary-soft"></div>
             </div>
           {/each}
         </div>
       {:else if reader.mode === "surah"}
-        <div class="rounded-2xl border border-line bg-ink-900/50 px-4 py-4 sm:px-6">
+        <div class="card rounded-2xl px-4 py-4 sm:px-6">
           <div class="flex flex-wrap items-start justify-between gap-3 border-b border-line/60 pb-4">
             <div>
-              <h2 dir="rtl" lang="ar" class="font-quran text-2xl leading-tight text-cream">
+              <h2 dir="rtl" lang="ar" class="font-quran text-2xl leading-tight text-text">
                 {i18n.t("reader.surahLabel", { name: reader.surahMeta?.name ?? "" })}
               </h2>
               <p class="mt-1 text-[11px] text-muted">
@@ -411,7 +411,7 @@
                 {/if}
               </p>
             </div>
-            <span class="rounded-full border border-gold/25 bg-gold/5 px-2.5 py-1 text-[10px] text-gold">
+            <span class="pill pill-primary">
               {i18n.t("reader.ayahCount", { count: fmtNumber(reader.ayahs.length) })}
             </span>
           </div>
@@ -420,7 +420,7 @@
             <p
               dir="rtl"
               lang="ar"
-              class="mx-auto mt-5 max-w-2xl text-center font-quran text-gold/90"
+              class="mx-auto mt-5 max-w-2xl text-center font-quran text-accent-ink leading-[2.1]"
               style={`font-size: ${reader.fontSize + 2}px`}
             >
               {basmalaFor(reader.ayahs[0])}
@@ -440,9 +440,9 @@
           </div>
         </div>
       {:else}
-        <div class="rounded-2xl border border-line bg-ink-900/60 p-4">
+        <div class="card rounded-2xl p-4">
           <div class="flex items-center justify-between gap-3">
-            <h2 class="text-lg font-bold text-cream">
+            <h2 class="text-lg font-bold text-text">
               {i18n.t("reader.juzLabel", { number: fmtNumber(reader.juz) })}
             </h2>
             {#if reader.juzMeta}
@@ -457,9 +457,9 @@
         </div>
 
         {#each juzGroups as group (group.surah.number)}
-          <div class="mt-3 rounded-2xl border border-line bg-ink-900/50 px-4 py-4 sm:px-6">
+          <div class="card mt-3 rounded-2xl px-4 py-4 sm:px-6">
             <div class="border-b border-line/60 pb-3">
-              <h3 dir="rtl" lang="ar" class="font-quran text-xl text-cream">
+              <h3 dir="rtl" lang="ar" class="font-quran text-xl text-text">
                 {i18n.t("reader.surahLabel", { name: group.surah.name })}
               </h3>
               <p class="mt-1 text-[10px] text-muted">
@@ -472,7 +472,7 @@
               <p
                 dir="rtl"
                 lang="ar"
-                class="mx-auto mt-4 max-w-2xl text-center font-quran text-gold/90"
+                class="mx-auto mt-4 max-w-2xl text-center font-quran text-accent-ink leading-[2.1]"
                 style={`font-size: ${reader.fontSize + 2}px`}
               >
                 {basmalaFor(group.ayahs[0])}

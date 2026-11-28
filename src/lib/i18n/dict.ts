@@ -3,6 +3,8 @@ const ar = {
   "app.tagline": "القرآن والأناشيد والإذاعة",
 
   "nav.home": "الرئيسية",
+  "nav.menu": "القائمة",
+  "nav.primary": "التنقل الرئيسي",
   "nav.search": "بحث",
   "nav.quran": "القرآن",
   "nav.explore": "استكشف",
@@ -416,6 +418,8 @@ const en: Record<Key, string> = {
   "app.tagline": "Quran, anasheed and radio",
 
   "nav.home": "Home",
+  "nav.menu": "Menu",
+  "nav.primary": "Primary navigation",
   "nav.search": "Search",
   "nav.quran": "Quran",
   "nav.explore": "Explore",

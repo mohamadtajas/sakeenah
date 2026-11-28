@@ -132,12 +132,12 @@
 </script>
 
 <div class="fade-in">
-  <div class="mb-6 inline-flex rounded-xl border border-line bg-ink-900 p-1">
+  <div class="mb-6 inline-flex rounded-xl border border-line bg-surface p-1 shadow-card">
     <button
       type="button"
       onclick={() => nav.go("quran")}
       class="rounded-lg px-3 py-1.5 text-xs font-medium transition-colors
-             {nav.params[0] !== 'ayah' ? 'bg-gold text-ink-950' : 'text-muted hover:text-cream'}"
+             {nav.params[0] !== 'ayah' ? 'bg-primary-soft font-semibold text-primary' : 'text-muted hover:text-text'}"
     >
       {i18n.t("quran.fullSurah")}
     </button>
@@ -145,7 +145,7 @@
       type="button"
       onclick={() => nav.go("quran", "ayah")}
       class="rounded-lg px-3 py-1.5 text-xs font-medium transition-colors
-             {nav.params[0] === 'ayah' ? 'bg-gold text-ink-950' : 'text-muted hover:text-cream'}"
+             {nav.params[0] === 'ayah' ? 'bg-primary-soft font-semibold text-primary' : 'text-muted hover:text-text'}"
     >
       {i18n.t("quran.byAyah")}
     </button>
@@ -158,7 +158,7 @@
     <button
       type="button"
       onclick={() => nav.go("quran")}
-      class="mb-5 flex items-center gap-1.5 text-xs text-muted transition-colors hover:text-gold"
+      class="mb-5 flex items-center gap-1.5 text-xs text-muted transition-colors hover:text-primary"
     >
       <Icon name="chevron" size={13} class="rotate-180 rtl:rotate-0" />
       {i18n.t("quran.backToReciters")}
@@ -169,14 +169,14 @@
         seed={selected.name}
         kind="quran"
         initials
-        class="size-24 shrink-0 shadow-xl shadow-black/30"
+        class="size-24 shrink-0 shadow-card"
         rounded="rounded-3xl"
       />
       <div class="min-w-0 flex-1">
-        <p class="text-[10px] font-bold uppercase tracking-[0.22em] text-gold/80">
+        <p class="text-[10px] font-bold uppercase tracking-[0.22em] text-accent-ink">
           {i18n.t("quran.title")}
         </p>
-        <h1 class="mt-1 truncate pb-1 font-quran text-3xl leading-[1.5] text-cream">{selected.name}</h1>
+        <h1 class="mt-1 truncate pb-1 font-quran text-3xl leading-[1.5] text-text">{selected.name}</h1>
         <p class="mt-1 text-xs text-muted">
           {moshaf?.name} · {fmtNumber(moshaf?.surahTotal ?? 0)} {i18n.t("quran.surah")}
         </p>
@@ -184,7 +184,7 @@
       <button
         type="button"
         onclick={playAll}
-        class="flex items-center gap-2 rounded-xl bg-gold px-4 py-2.5 text-sm font-semibold text-ink-950 transition-transform hover:scale-[1.02] active:scale-95"
+        class="btn btn-primary"
       >
         <Icon name="play" size={14} />
         {i18n.t("quran.playAll")}
@@ -193,7 +193,7 @@
         type="button"
         onclick={downloadAll}
         disabled={!tracks.length || loadingTracks}
-        class="flex items-center gap-2 rounded-xl border border-line px-4 py-2.5 text-sm font-medium text-cream transition-colors hover:border-gold/40 hover:text-gold disabled:cursor-not-allowed disabled:opacity-40"
+        class="btn btn-outline"
         title={i18n.t("library.downloadAll")}
       >
         <Icon name="download" size={14} />
@@ -209,8 +209,8 @@
             onclick={() => chooseMoshaf(m.id)}
             class="rounded-full border px-3 py-1.5 text-[11px] transition-colors
                    {m.id === moshaf?.id
-              ? 'border-gold/50 bg-gold/12 text-gold'
-              : 'border-line text-muted hover:border-gold/30 hover:text-cream'}"
+              ? 'border-primary/35 bg-primary-soft font-semibold text-primary'
+              : 'border-line text-muted hover:border-primary/30 hover:text-text'}"
           >
             {m.name}
           </button>
@@ -218,13 +218,13 @@
       </div>
     {/if}
 
-    <div class="mt-6 overflow-hidden rounded-2xl border border-line bg-ink-900/60">
+    <div class="card mt-6 overflow-hidden rounded-2xl">
       {#if loadingTracks}
         <div class="divide-y divide-line/60">
           {#each Array(10) as _, i (i)}
             <div class="flex animate-pulse items-center gap-3 px-4 py-3">
-              <div class="size-9 rounded-lg bg-ink-800"></div>
-              <div class="h-3 w-40 rounded bg-ink-800"></div>
+              <div class="size-9 rounded-lg bg-primary-soft"></div>
+              <div class="h-3 w-40 rounded bg-primary-soft"></div>
             </div>
           {/each}
         </div>
@@ -234,7 +234,7 @@
           {@const dl = library.downloadFor(row.track.id)}
           <div
             class="group flex w-full items-center gap-3 border-b border-line/50 px-4 py-2.5 transition-colors last:border-0
-                   {active ? 'bg-gold/8' : 'hover:bg-ink-800/60'}"
+                   {active ? 'bg-primary-soft' : 'hover:bg-primary-soft/35'}"
           >
             <button
               type="button"
@@ -244,8 +244,8 @@
               <span
                 class="grid size-9 shrink-0 place-items-center rounded-lg border text-[11px] tabular-nums transition-colors
                        {active
-                  ? 'border-gold/40 bg-gold/10 text-gold'
-                  : 'border-line text-muted group-hover:border-gold/30 group-hover:text-gold'}"
+                  ? 'border-primary/40 bg-primary-soft text-primary'
+                  : 'border-line text-muted group-hover:border-primary/30 group-hover:text-primary'}"
               >
                 {#if active && player.playing}
                   <div class="eq"><i></i><i></i><i></i><i></i></div>
@@ -254,7 +254,7 @@
                 {/if}
               </span>
               <span class="min-w-0 flex-1">
-                <span class="block truncate font-quran text-[1.05rem] leading-snug {active ? 'text-gold' : 'text-cream'}">
+                <span class="block truncate font-quran text-[1.05rem] leading-snug {active ? 'text-primary' : 'text-text'}">
                   {shortName(row.surah.name)}
                 </span>
                 <span class="block truncate text-[11px] text-muted">
@@ -279,15 +279,15 @@
                 aria-label={i18n.t("library.download")}
                 class="rounded-lg p-1.5 transition-colors
                        {dl?.status === 'done'
-                  ? 'text-teal'
+                  ? 'text-primary'
                   : dl?.status === 'error'
-                    ? 'text-red-400'
+                    ? 'text-red-500'
                     : dl
-                      ? 'text-gold'
-                      : 'text-muted opacity-0 group-hover:opacity-100 focus-visible:opacity-100 hover:text-cream'}"
+                      ? 'text-accent-ink'
+                      : 'text-muted opacity-0 group-hover:opacity-100 focus-visible:opacity-100 hover:text-text'}"
               >
                 {#if dl?.status === "queued" || dl?.status === "downloading"}
-                  <span class="size-3.5 animate-spin rounded-full border border-gold/30 border-t-gold"></span>
+                  <span class="size-3.5 animate-spin rounded-full border border-accent/30 border-t-accent"></span>
                 {:else if dl?.status === "done"}
                   <Icon name="check" size={13} />
                 {:else}
@@ -306,18 +306,18 @@
     </div>
   {:else}
     <header>
-      <p class="text-[10px] font-bold uppercase tracking-[0.22em] text-gold/80">
+      <p class="text-[10px] font-bold uppercase tracking-[0.22em] text-accent-ink">
         {i18n.t("quran.chooseReciter")}
       </p>
-      <h1 class="mt-1 text-2xl font-bold text-cream">{i18n.t("quran.title")}</h1>
+      <h1 class="mt-1 text-2xl font-bold text-text">{i18n.t("quran.title")}</h1>
       <p class="mt-1 text-xs text-muted">{i18n.t("quran.subtitle")}</p>
-      <label class="mt-5 flex max-w-sm items-center gap-2 rounded-xl border border-line bg-ink-850 px-3 py-2 focus-within:border-gold/50">
+      <label class="field mt-5 max-w-sm">
         <Icon name="search" size={15} class="text-muted" />
         <input
           bind:value={filter}
           aria-label={i18n.t("quran.searchReciter")}
           placeholder={i18n.t("quran.searchReciter")}
-          class="w-full bg-transparent text-sm text-cream placeholder:text-muted/70 focus:outline-none"
+          class="w-full bg-transparent text-sm text-text placeholder:text-muted/70 focus:outline-none"
         />
       </label>
     </header>
@@ -326,18 +326,18 @@
       <div class="mt-7 grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
         {#each Array(16) as _, i (i)}
           <div class="animate-pulse">
-            <div class="aspect-square rounded-2xl bg-ink-800"></div>
-            <div class="mt-2 h-3 w-3/4 rounded bg-ink-800"></div>
+            <div class="aspect-square rounded-2xl bg-primary-soft"></div>
+            <div class="mt-2 h-3 w-3/4 rounded bg-primary-soft"></div>
           </div>
         {/each}
       </div>
     {:else if loadError}
-      <div class="mt-10 rounded-2xl border border-gold/30 bg-gold/[0.05] px-5 py-6 text-center">
+      <div class="card mt-10 rounded-2xl px-5 py-6 text-center">
         <p class="text-sm text-muted">{i18n.t("common.offline")}</p>
         <button
           type="button"
           onclick={() => loadCatalogue()}
-          class="mt-3 rounded-lg border border-gold/40 px-3 py-1.5 text-xs text-gold"
+          class="btn btn-outline mt-3"
         >
           {i18n.t("common.retry")}
         </button>
@@ -361,14 +361,14 @@
                 rounded="rounded-2xl"
               />
               <div
-                class="absolute inset-0 grid place-items-center rounded-2xl bg-ink-950/45 opacity-0 transition-opacity group-hover:opacity-100"
+                class="absolute inset-0 grid place-items-center rounded-2xl bg-canvas/40 opacity-0 transition-opacity group-hover:opacity-100"
               >
-                <span class="grid size-9 place-items-center rounded-full bg-gold text-ink-950">
+                <span class="grid size-9 place-items-center rounded-full bg-accent text-canvas shadow-card">
                   <Icon name="play" size={13} />
                 </span>
               </div>
             </div>
-            <div class="mt-2 truncate text-[0.83rem] font-medium text-cream group-hover:text-gold">
+            <div class="mt-2 truncate text-[0.83rem] font-medium text-text group-hover:text-primary">
               {reciter.name}
             </div>
             <div class="truncate text-[11px] text-muted">{reciter.moshafs[0]?.name ?? ""}</div>

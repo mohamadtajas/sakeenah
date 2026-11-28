@@ -389,8 +389,8 @@ class _PlayerPageState extends State<PlayerPage> {
                         : l10n.audioPlay,
                     onPressed: _playback.toggle,
                     style: IconButton.styleFrom(
-                      backgroundColor: SakeenahColors.gold,
-                      foregroundColor: SakeenahColors.ink,
+                      backgroundColor: scheme.primary,
+                      foregroundColor: scheme.onPrimary,
                       minimumSize: const Size(64, 64),
                     ),
                     iconSize: 36,

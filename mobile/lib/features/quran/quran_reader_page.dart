@@ -397,7 +397,7 @@ class _AyahTile extends StatelessWidget {
       child: InkWell(
         key: ValueKey('quran-ayah-${ayah.surah}-${ayah.number}'),
         onTap: onTap,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(12),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(6, 10, 6, 12),
           child: Column(
@@ -424,7 +424,10 @@ class _AyahTile extends StatelessWidget {
                     const SizedBox(width: 6),
                     Text(
                       l10n.quranSajda,
-                      style: TextStyle(fontSize: 9, color: scheme.secondary),
+                      style: TextStyle(
+                        fontSize: 9,
+                        color: scheme.onSecondaryContainer,
+                      ),
                     ),
                   ],
                   const Spacer(),

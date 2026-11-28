@@ -320,17 +320,17 @@
 
 <div class="fade-in max-w-2xl">
   <header>
-    <h1 class="text-2xl font-bold text-cream">{i18n.t("settings.title")}</h1>
+    <h1 class="text-2xl font-bold text-text">{i18n.t("settings.title")}</h1>
   </header>
 
-  <section class="mt-6 rounded-2xl border border-line bg-ink-900/60 p-5">
-    <h2 class="text-sm font-semibold text-cream">{i18n.t("settings.language")}</h2>
+  <section class="mt-6 card rounded-2xl p-5">
+    <h2 class="text-sm font-semibold text-text">{i18n.t("settings.language")}</h2>
     <div class="mt-3 flex gap-2">
       <button
         type="button"
         onclick={() => i18n.set("ar")}
         class="rounded-xl border px-4 py-2 text-sm transition-colors
-               {i18n.locale === 'ar' ? 'border-gold/50 bg-gold/10 text-gold' : 'border-line text-muted hover:text-cream'}"
+               {i18n.locale === 'ar' ? 'border-primary/40 bg-primary-soft text-primary' : 'border-line text-muted hover:text-text'}"
       >
         العربية
       </button>
@@ -338,21 +338,21 @@
         type="button"
         onclick={() => i18n.set("en")}
         class="rounded-xl border px-4 py-2 text-sm transition-colors
-               {i18n.locale === 'en' ? 'border-gold/50 bg-gold/10 text-gold' : 'border-line text-muted hover:text-cream'}"
+               {i18n.locale === 'en' ? 'border-primary/40 bg-primary-soft text-primary' : 'border-line text-muted hover:text-text'}"
       >
         English
       </button>
     </div>
   </section>
 
-  <section class="mt-4 rounded-2xl border border-line bg-ink-900/60 p-5">
-    <h2 class="text-sm font-semibold text-cream">{i18n.t("settings.theme")}</h2>
+  <section class="mt-4 card rounded-2xl p-5">
+    <h2 class="text-sm font-semibold text-text">{i18n.t("settings.theme")}</h2>
     <div class="mt-3 flex gap-2">
       <button
         type="button"
         onclick={() => ui.setTheme("dark")}
         class="rounded-xl border px-4 py-2 text-sm transition-colors
-               {ui.theme === 'dark' ? 'border-gold/50 bg-gold/10 text-gold' : 'border-line text-muted hover:text-cream'}"
+               {ui.theme === 'dark' ? 'border-primary/40 bg-primary-soft text-primary' : 'border-line text-muted hover:text-text'}"
       >
         {i18n.t("settings.dark")}
       </button>
@@ -360,24 +360,24 @@
         type="button"
         onclick={() => ui.setTheme("light")}
         class="rounded-xl border px-4 py-2 text-sm transition-colors
-               {ui.theme === 'light' ? 'border-gold/50 bg-gold/10 text-gold' : 'border-line text-muted hover:text-cream'}"
+               {ui.theme === 'light' ? 'border-primary/40 bg-primary-soft text-primary' : 'border-line text-muted hover:text-text'}"
       >
         {i18n.t("settings.light")}
       </button>
     </div>
   </section>
 
-  <section class="mt-4 rounded-2xl border border-line bg-ink-900/60 p-5">
+  <section class="mt-4 card rounded-2xl p-5">
     <div class="flex flex-wrap items-center justify-between gap-2">
-      <h2 class="flex items-center gap-2 text-sm font-semibold text-cream">
-        <Icon name="compass" size={15} class="text-gold" />
+      <h2 class="flex items-center gap-2 text-sm font-semibold text-text">
+        <Icon name="compass" size={15} class="text-primary" />
         {i18n.t("settings.prayer")}
       </h2>
       <span
         class="rounded-full border px-2.5 py-1 text-[10px] font-medium
                {prayer.configured
-          ? 'border-teal/40 bg-teal/10 text-teal'
-          : 'border-gold/30 bg-gold/5 text-gold'}"
+          ? 'border-primary/40 bg-primary-soft text-primary'
+          : 'border-accent/30 bg-accent/5 text-accent-ink'}"
       >
         {prayer.configured ? i18n.t("settings.locationSet") : i18n.t("settings.locationUnset")}
       </span>
@@ -390,7 +390,7 @@
         <select
           value={matchedCity?.id ?? ""}
           onchange={(event) => chooseCity(event.currentTarget.value)}
-          class="mt-1 w-full rounded-xl border border-line bg-ink-850 px-3 py-2 text-sm text-cream focus:border-gold/50 focus:outline-none"
+          class="mt-1 w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm text-text focus:border-primary/60 focus:outline-none"
         >
           <option value="">{i18n.t("settings.customLocation")}</option>
           {#each cities as city (city.id)}
@@ -407,7 +407,7 @@
         <span class="text-[11px] text-muted">{i18n.t("settings.timezone")}</span>
         <select
           bind:value={prayer.timezone}
-          class="mt-1 w-full rounded-xl border border-line bg-ink-850 px-3 py-2 text-sm text-cream focus:border-gold/50 focus:outline-none"
+          class="mt-1 w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm text-text focus:border-primary/60 focus:outline-none"
         >
           {#each zoneOptions as zone (zone)}
             <option value={zone}>{zone}</option>
@@ -424,7 +424,7 @@
           max="90"
           bind:value={prayer.latitude}
           onchange={() => (prayer = { ...prayer, configured: true })}
-          class="mt-1 w-full rounded-xl border border-line bg-ink-850 px-3 py-2 text-sm tabular-nums text-cream focus:border-gold/50 focus:outline-none"
+          class="mt-1 w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm tabular-nums text-text focus:border-primary/60 focus:outline-none"
         />
       </label>
 
@@ -437,7 +437,7 @@
           max="180"
           bind:value={prayer.longitude}
           onchange={() => (prayer = { ...prayer, configured: true })}
-          class="mt-1 w-full rounded-xl border border-line bg-ink-850 px-3 py-2 text-sm tabular-nums text-cream focus:border-gold/50 focus:outline-none"
+          class="mt-1 w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm tabular-nums text-text focus:border-primary/60 focus:outline-none"
         />
       </label>
 
@@ -447,7 +447,7 @@
           value={prayer.method}
           onchange={(event) =>
             (prayer = { ...prayer, method: event.currentTarget.value as PrayerMethod })}
-          class="mt-1 w-full rounded-xl border border-line bg-ink-850 px-3 py-2 text-sm text-cream focus:border-gold/50 focus:outline-none"
+          class="mt-1 w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm text-text focus:border-primary/60 focus:outline-none"
         >
           {#each PRAYER_METHODS as method (method)}
             <option value={method}>{i18n.t(`method.${method}` as TranslationKey)}</option>
@@ -464,7 +464,7 @@
               ...prayer,
               madhab: event.currentTarget.value === "hanafi" ? "hanafi" : "shafi",
             })}
-          class="mt-1 w-full rounded-xl border border-line bg-ink-850 px-3 py-2 text-sm text-cream focus:border-gold/50 focus:outline-none"
+          class="mt-1 w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm text-text focus:border-primary/60 focus:outline-none"
         >
           <option value="shafi">{i18n.t("settings.shafi")}</option>
           <option value="hanafi">{i18n.t("settings.hanafi")}</option>
@@ -480,7 +480,7 @@
               ...prayer,
               highLatitude: event.currentTarget.value as HighLatitudeRule,
             })}
-          class="mt-1 w-full rounded-xl border border-line bg-ink-850 px-3 py-2 text-sm text-cream focus:border-gold/50 focus:outline-none"
+          class="mt-1 w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm text-text focus:border-primary/60 focus:outline-none"
         >
           {#each HIGH_LATITUDE_RULES as rule (rule)}
             <option value={rule}>{i18n.t(`highLat.${rule}` as TranslationKey)}</option>
@@ -500,7 +500,7 @@
             max="3"
             step="1"
             bind:value={prayer.hijriAdjustment}
-            class="w-24 rounded-xl border border-line bg-ink-850 px-3 py-2 text-sm tabular-nums text-cream focus:border-gold/50 focus:outline-none"
+            class="w-24 rounded-xl border border-line bg-surface px-3 py-2 text-sm tabular-nums text-text focus:border-primary/60 focus:outline-none"
           />
           <span class="text-[11px] leading-relaxed text-muted">{i18n.t("settings.hijriHint")}</span>
         </div>
@@ -512,7 +512,7 @@
         type="button"
         onclick={savePrayer}
         disabled={savingPrayer || worship.pending}
-        class="flex items-center gap-2 rounded-xl bg-gold px-3.5 py-2 text-xs font-semibold text-ink-950 transition-transform hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+        class="flex items-center gap-2 rounded-xl btn btn-primary min-h-0 px-3.5 py-2 text-xs transition-transform hover:scale-[1.02] active:scale-95 disabled:opacity-50"
       >
         <Icon name="check" size={13} />
         {i18n.t("settings.savePrayer")}
@@ -523,8 +523,8 @@
     </div>
   </section>
 
-  <section class="mt-4 rounded-2xl border border-line bg-ink-900/60 p-5">
-    <h2 class="text-sm font-semibold text-cream">{i18n.t("settings.playback")}</h2>
+  <section class="mt-4 card rounded-2xl p-5">
+    <h2 class="text-sm font-semibold text-text">{i18n.t("settings.playback")}</h2>
 
     <div class="mt-4 flex items-center justify-between">
       <span class="text-sm text-muted">{i18n.t("settings.defaultSpeed")}</span>
@@ -535,8 +535,8 @@
             onclick={() => player.setRate(s)}
             class="rounded-lg border px-2.5 py-1 text-xs tabular-nums transition-colors
                    {player.rate === s
-              ? 'border-gold/50 bg-gold/10 text-gold'
-              : 'border-line text-muted hover:text-cream'}"
+              ? 'border-primary/40 bg-primary-soft text-primary'
+              : 'border-line text-muted hover:text-text'}"
           >
             {s}×
           </button>
@@ -545,11 +545,11 @@
     </div>
   </section>
 
-  <section class="mt-4 rounded-2xl border border-line bg-ink-900/60 p-5">
-    <h2 class="text-sm font-semibold text-cream">{i18n.t("settings.downloads")}</h2>
+  <section class="mt-4 card rounded-2xl p-5">
+    <h2 class="text-sm font-semibold text-text">{i18n.t("settings.downloads")}</h2>
     <div class="mt-4 flex items-start justify-between gap-4">
       <div class="min-w-0">
-        <div class="text-sm text-cream">{i18n.t("settings.allowUnknownLicense")}</div>
+        <div class="text-sm text-text">{i18n.t("settings.allowUnknownLicense")}</div>
         <p class="mt-1 text-xs leading-relaxed text-muted">
           {i18n.t("settings.allowUnknownLicenseHint")}
         </p>
@@ -562,11 +562,11 @@
         onclick={() => library.setAllowUnknownLicense(!library.allowUnknownLicense)}
         class="relative mt-0.5 h-6 w-11 shrink-0 rounded-full border transition-colors
                {library.allowUnknownLicense
-          ? 'border-gold/60 bg-gold/80'
-          : 'border-line bg-ink-800'}"
+          ? 'border-primary/60 bg-primary/80'
+          : 'border-line bg-raised'}"
       >
         <span
-          class="absolute top-[3px] size-[18px] rounded-full bg-cream shadow transition-all
+          class="absolute top-[3px] size-[18px] rounded-full bg-surface shadow transition-all
                  {library.allowUnknownLicense ? 'start-[22px]' : 'start-[3px]'}"
         ></span>
       </button>
@@ -574,13 +574,13 @@
 
     <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-line/60 pt-4">
       <p class="text-xs text-muted">
-        <span class="font-semibold text-cream">
+        <span class="font-semibold text-text">
           {fmtBytes(library.storage?.totalBytes ?? 0)}
         </span>
         · {i18n.t("library.storageDownloaded")}
         {fmtNumber(library.storage?.downloadedCount ?? 0)}
         {#if library.storage?.active}
-          · <span class="text-gold">{i18n.t("library.storageActive")}
+          · <span class="text-accent-ink">{i18n.t("library.storageActive")}
             {fmtNumber(library.storage?.active ?? 0)}</span>
         {/if}
         {#if library.storage?.queued}
@@ -591,7 +591,7 @@
       <button
         type="button"
         onclick={() => nav.go("library", "downloads")}
-        class="flex items-center gap-1.5 rounded-lg border border-line px-2.5 py-1.5 text-[11px] text-cream transition-colors hover:border-gold/40 hover:text-gold"
+        class="flex items-center gap-1.5 rounded-lg border border-line px-2.5 py-1.5 text-[11px] text-text transition-colors hover:border-primary/40 hover:text-primary"
       >
         <Icon name="download" size={12} />
         {i18n.t("settings.manageDownloads")}
@@ -599,15 +599,15 @@
     </div>
   </section>
 
-  <section class="mt-4 rounded-2xl border border-line bg-ink-900/60 p-5">
+  <section class="mt-4 card rounded-2xl p-5">
     <div class="flex items-start justify-between gap-4">
       <div class="min-w-0">
-        <h2 class="text-sm font-semibold text-cream">{i18n.t("settings.adhan")}</h2>
+        <h2 class="text-sm font-semibold text-text">{i18n.t("settings.adhan")}</h2>
         <p class="mt-1 text-xs leading-relaxed text-muted">
           {i18n.t("settings.adhanHint")}
         </p>
         {#if !prayer.configured}
-          <p class="mt-2 rounded-lg border border-gold/30 bg-gold/[0.05] px-2.5 py-2 text-[10px] leading-relaxed text-gold">
+          <p class="mt-2 rounded-lg border border-accent/30 bg-accent/5 px-2.5 py-2 text-[10px] leading-relaxed text-accent-ink">
             {i18n.t("settings.adhanNeedsLocation")}
           </p>
         {/if}
@@ -621,19 +621,19 @@
         onclick={() => saveAdhan({ enabled: !(adhan.settings?.enabled ?? false) })}
         class="relative mt-0.5 h-6 w-11 shrink-0 rounded-full border transition-colors disabled:opacity-40
                {adhan.settings?.enabled
-          ? 'border-gold/60 bg-gold/80'
-          : 'border-line bg-ink-800'}"
+          ? 'border-primary/60 bg-primary/80'
+          : 'border-line bg-raised'}"
       >
         <span
-          class="absolute top-[3px] size-[18px] rounded-full bg-cream shadow transition-all
+          class="absolute top-[3px] size-[18px] rounded-full bg-surface shadow transition-all
                  {adhan.settings?.enabled ? 'start-[22px]' : 'start-[3px]'}"
         ></span>
       </button>
     </div>
 
     {#if adhan.settings}
-      <div class="mt-4 flex flex-wrap items-center gap-3 rounded-xl border border-line/60 bg-ink-850/40 px-3 py-2.5">
-        <Icon name="volume" size={14} class="shrink-0 text-gold" />
+      <div class="mt-4 flex flex-wrap items-center gap-3 rounded-xl border border-line/60 bg-surface/40 px-3 py-2.5">
+        <Icon name="volume" size={14} class="shrink-0 text-primary" />
         <input
           type="range"
           min="0"
@@ -643,7 +643,7 @@
           oninput={changeVolume}
           onchange={commitVolume}
           aria-label={i18n.t("settings.adhanVolume")}
-          class="min-w-24 flex-1 accent-gold"
+          class="min-w-24 flex-1 accent-[var(--color-accent)]"
         />
         <span class="w-10 shrink-0 text-end text-[11px] tabular-nums text-muted">{volumePct}%</span>
         <button
@@ -652,8 +652,8 @@
           disabled={!prayer.configured}
           class="flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11px] transition-colors disabled:opacity-40
                  {adhan.playing
-            ? 'border-gold/40 bg-gold/10 text-gold'
-            : 'border-line text-cream hover:border-gold/40 hover:text-gold'}"
+            ? 'border-primary/40 bg-primary-soft text-primary'
+            : 'border-line text-text hover:border-primary/40 hover:text-primary'}"
         >
           <Icon name={adhan.playing ? "pause" : "play"} size={12} />
           {i18n.t(adhan.playing ? "settings.adhanStop" : "settings.adhanTest")}
@@ -667,7 +667,7 @@
       {/if}
 
       <div class="mt-4 overflow-hidden rounded-xl border border-line/60">
-        <div class="grid grid-cols-[1fr_auto_auto] items-center gap-3 border-b border-line/60 bg-ink-850/60 px-3 py-2 text-[10px] text-muted">
+        <div class="grid grid-cols-[1fr_auto_auto] items-center gap-3 border-b border-line/60 bg-surface/60 px-3 py-2 text-[10px] text-muted">
           <span>{i18n.t("settings.adhanPerPrayer")}</span>
           <span class="w-11 text-center">{i18n.t("settings.adhanSound")}</span>
           <span class="w-11 text-center">{i18n.t("settings.adhanNotify")}</span>
@@ -675,7 +675,7 @@
         {#each PRAYER_ALERTS as row (row.key)}
           {@const alert = adhan.settings.prayers[row.key] ?? { adhan: true, notify: true }}
           <div class="grid grid-cols-[1fr_auto_auto] items-center gap-3 border-b border-line/40 px-3 py-2 text-xs last:border-0">
-            <span class="text-cream">{i18n.t(row.label)}</span>
+            <span class="text-text">{i18n.t(row.label)}</span>
             <button
               type="button"
               role="switch"
@@ -684,10 +684,10 @@
               disabled={!prayer.configured}
               onclick={() => adhan.setPrayer(row.key, { adhan: !alert.adhan })}
               class="relative h-5 w-9 rounded-full border transition-colors disabled:opacity-40
-                     {alert.adhan ? 'border-gold/60 bg-gold/80' : 'border-line bg-ink-800'}"
+                     {alert.adhan ? 'border-primary/60 bg-primary/80' : 'border-line bg-raised'}"
             >
               <span
-                class="absolute top-[2px] size-3.5 rounded-full bg-cream shadow transition-all
+                class="absolute top-[2px] size-3.5 rounded-full bg-surface shadow transition-all
                        {alert.adhan ? 'start-[18px]' : 'start-[2px]'}"
               ></span>
             </button>
@@ -699,10 +699,10 @@
               disabled={!prayer.configured}
               onclick={() => adhan.setPrayer(row.key, { notify: !alert.notify })}
               class="relative h-5 w-9 rounded-full border transition-colors disabled:opacity-40
-                     {alert.notify ? 'border-gold/60 bg-gold/80' : 'border-line bg-ink-800'}"
+                     {alert.notify ? 'border-primary/60 bg-primary/80' : 'border-line bg-raised'}"
             >
               <span
-                class="absolute top-[2px] size-3.5 rounded-full bg-cream shadow transition-all
+                class="absolute top-[2px] size-3.5 rounded-full bg-surface shadow transition-all
                        {alert.notify ? 'start-[18px]' : 'start-[2px]'}"
               ></span>
             </button>
@@ -712,7 +712,7 @@
 
       <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
         <div class="min-w-0">
-          <p class="text-xs text-cream">{i18n.t("settings.preAlert")}</p>
+          <p class="text-xs text-text">{i18n.t("settings.preAlert")}</p>
           <p class="mt-0.5 text-[10px] text-muted">{i18n.t("settings.preAlertHint")}</p>
         </div>
         <div class="flex items-center gap-2">
@@ -722,7 +722,7 @@
               saveAdhan({ preAlertMinutes: Number(event.currentTarget.value) })}
             disabled={!prayer.configured || !adhan.settings.preAlertEnabled}
             aria-label={i18n.t("settings.preAlertMinutes")}
-            class="rounded-lg border border-line bg-ink-850 px-2 py-1 text-[11px] text-cream disabled:opacity-40"
+            class="rounded-lg border border-line bg-surface px-2 py-1 text-[11px] text-text disabled:opacity-40"
           >
             {#each PRE_ALERT_MINUTES as minutes (minutes)}
               <option value={minutes}>{fmtNumber(minutes)} {i18n.t("settings.minuteShort")}</option>
@@ -737,11 +737,11 @@
             onclick={() => saveAdhan({ preAlertEnabled: !adhan.settings?.preAlertEnabled })}
             class="relative h-5 w-9 rounded-full border transition-colors disabled:opacity-40
                    {adhan.settings.preAlertEnabled
-              ? 'border-gold/60 bg-gold/80'
-              : 'border-line bg-ink-800'}"
+              ? 'border-primary/60 bg-primary/80'
+              : 'border-line bg-raised'}"
           >
             <span
-              class="absolute top-[2px] size-3.5 rounded-full bg-cream shadow transition-all
+              class="absolute top-[2px] size-3.5 rounded-full bg-surface shadow transition-all
                      {adhan.settings.preAlertEnabled ? 'start-[18px]' : 'start-[2px]'}"
             ></span>
           </button>
@@ -750,11 +750,11 @@
     {/if}
   </section>
 
-  <section class="mt-4 rounded-2xl border border-line bg-ink-900/60 p-5">
-    <h2 class="text-sm font-semibold text-cream">{i18n.t("settings.desktop")}</h2>
+  <section class="mt-4 card rounded-2xl p-5">
+    <h2 class="text-sm font-semibold text-text">{i18n.t("settings.desktop")}</h2>
     <div class="mt-4 flex items-start justify-between gap-4">
       <div class="min-w-0">
-        <p class="text-xs text-cream">{i18n.t("settings.autostart")}</p>
+        <p class="text-xs text-text">{i18n.t("settings.autostart")}</p>
         <p class="mt-0.5 text-[10px] leading-relaxed text-muted">
           {i18n.t("settings.autostartHint")}
         </p>
@@ -767,17 +767,17 @@
         disabled={desktopBusy}
         onclick={toggleAutostart}
         class="relative mt-0.5 h-6 w-11 shrink-0 rounded-full border transition-colors disabled:opacity-50
-               {autostart ? 'border-gold/60 bg-gold/80' : 'border-line bg-ink-800'}"
+               {autostart ? 'border-primary/60 bg-primary/80' : 'border-line bg-raised'}"
       >
         <span
-          class="absolute top-[3px] size-[18px] rounded-full bg-cream shadow transition-all
+          class="absolute top-[3px] size-[18px] rounded-full bg-surface shadow transition-all
                  {autostart ? 'start-[22px]' : 'start-[3px]'}"
         ></span>
       </button>
     </div>
     <div class="mt-4 flex items-start justify-between gap-4 border-t border-line/60 pt-4">
       <div class="min-w-0">
-        <p class="text-xs text-cream">{i18n.t("settings.closeToTray")}</p>
+        <p class="text-xs text-text">{i18n.t("settings.closeToTray")}</p>
         <p class="mt-0.5 text-[10px] leading-relaxed text-muted">
           {i18n.t("settings.closeToTrayHint")}
         </p>
@@ -790,26 +790,26 @@
         disabled={desktopBusy}
         onclick={toggleCloseToTray}
         class="relative mt-0.5 h-6 w-11 shrink-0 rounded-full border transition-colors disabled:opacity-50
-               {closeToTray ? 'border-gold/60 bg-gold/80' : 'border-line bg-ink-800'}"
+               {closeToTray ? 'border-primary/60 bg-primary/80' : 'border-line bg-raised'}"
       >
         <span
-          class="absolute top-[3px] size-[18px] rounded-full bg-cream shadow transition-all
+          class="absolute top-[3px] size-[18px] rounded-full bg-surface shadow transition-all
                  {closeToTray ? 'start-[22px]' : 'start-[3px]'}"
         ></span>
       </button>
     </div>
-    <p class="mt-4 rounded-lg border border-line/60 bg-ink-850/40 px-3 py-2 text-[10px] leading-relaxed text-muted">
+    <p class="mt-4 rounded-lg border border-line/60 bg-surface/40 px-3 py-2 text-[10px] leading-relaxed text-muted">
       {i18n.t("settings.residentHint")}
     </p>
   </section>
 
-  <section class="mt-4 rounded-2xl border border-line bg-ink-900/60 p-5">
+  <section class="mt-4 card rounded-2xl p-5">
     <div class="flex items-center justify-between gap-3">
-      <h2 class="text-sm font-semibold text-cream">{i18n.t("settings.hotkeys")}</h2>
+      <h2 class="text-sm font-semibold text-text">{i18n.t("settings.hotkeys")}</h2>
       <button
         type="button"
         onclick={() => (hotkeyDraft = { ...DEFAULT_HOTKEYS })}
-        class="rounded-lg border border-line px-2.5 py-1 text-[10px] text-muted transition-colors hover:border-gold/40 hover:text-gold"
+        class="rounded-lg border border-line px-2.5 py-1 text-[10px] text-muted transition-colors hover:border-primary/40 hover:text-primary"
       >
         {i18n.t("settings.hotkeyReset")}
       </button>
@@ -818,13 +818,13 @@
 
     <div class="mt-4 space-y-2">
       {#each hotkeyRows as row (row.id)}
-        <div class="flex items-center justify-between gap-3 rounded-xl border border-line/70 bg-ink-850/60 px-3 py-2">
-          <span class="text-sm text-cream">{i18n.t(row.label)}</span>
+        <div class="flex items-center justify-between gap-3 rounded-xl border border-line/70 bg-surface/60 px-3 py-2">
+          <span class="text-sm text-text">{i18n.t(row.label)}</span>
           <div class="flex items-center gap-2">
             <kbd
               class="min-w-28 rounded-md border px-2 py-1 text-center text-[11px] tabular-nums
                      {recording === row.id
-                ? 'border-gold/60 text-gold'
+                ? 'border-primary/60 text-primary'
                 : hotkeyDraft[row.id]
                   ? 'border-line text-muted'
                   : 'border-line/60 text-muted/50'}"
@@ -838,8 +838,8 @@
               onclick={() => startRecording(row.id)}
               class="rounded-lg border px-2.5 py-1 text-[10px] transition-colors
                      {recording === row.id
-                ? 'border-gold/50 bg-gold/10 text-gold'
-                : 'border-line text-muted hover:border-gold/40 hover:text-gold'}"
+                ? 'border-primary/40 bg-primary-soft text-primary'
+                : 'border-line text-muted hover:border-primary/40 hover:text-primary'}"
             >
               {i18n.t("settings.hotkeyChange")}
             </button>
@@ -853,7 +853,7 @@
         type="button"
         onclick={saveHotkeys}
         disabled={savingHotkeys}
-        class="flex items-center gap-2 rounded-xl bg-gold px-3.5 py-2 text-xs font-semibold text-ink-950 transition-transform hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+        class="flex items-center gap-2 rounded-xl btn btn-primary min-h-0 px-3.5 py-2 text-xs transition-transform hover:scale-[1.02] active:scale-95 disabled:opacity-50"
       >
         <Icon name="check" size={13} />
         {i18n.t("settings.hotkeySave")}
@@ -862,19 +862,19 @@
     </div>
   </section>
 
-  <section class="mt-4 rounded-2xl border border-line bg-ink-900/60 p-5">
-    <h2 class="text-sm font-semibold text-cream">{i18n.t("settings.updates")}</h2>
+  <section class="mt-4 card rounded-2xl p-5">
+    <h2 class="text-sm font-semibold text-text">{i18n.t("settings.updates")}</h2>
 
     <div class="mt-3 flex flex-wrap items-center justify-between gap-3">
       <div class="min-w-0">
         {#if updateState === "checking"}
           <p class="text-sm text-muted">{i18n.t("settings.checking")}</p>
         {:else if updateState === "available"}
-          <p class="text-sm text-cream">
+          <p class="text-sm text-text">
             {i18n.t("settings.updateAvailable", { version: updateVersion })}
           </p>
         {:else if updateState === "none"}
-          <p class="text-sm text-teal">{i18n.t("settings.upToDate")}</p>
+          <p class="text-sm text-primary">{i18n.t("settings.upToDate")}</p>
         {:else if updateState === "error"}
           <p class="text-sm text-muted">{i18n.t("settings.updateFailed")}</p>
         {:else}
@@ -887,7 +887,7 @@
           type="button"
           onclick={installUpdate}
           disabled={installing}
-          class="flex items-center gap-2 rounded-xl bg-gold px-3.5 py-2 text-xs font-semibold text-ink-950 disabled:opacity-50"
+          class="flex items-center gap-2 rounded-xl btn btn-primary min-h-0 px-3.5 py-2 text-xs disabled:opacity-50"
         >
           <Icon name="download" size={13} />
           {installing ? i18n.t("settings.installing") : i18n.t("settings.installUpdate")}
@@ -897,7 +897,7 @@
           type="button"
           onclick={checkUpdates}
           disabled={updateState === "checking"}
-          class="flex items-center gap-2 rounded-xl border border-line px-3.5 py-2 text-xs font-medium text-cream transition-colors hover:border-gold/40 hover:text-gold disabled:opacity-50"
+          class="flex items-center gap-2 rounded-xl border border-line px-3.5 py-2 text-xs font-medium text-text transition-colors hover:border-primary/40 hover:text-primary disabled:opacity-50"
         >
           <Icon name="globe" size={13} />
           {i18n.t("settings.checkUpdates")}
@@ -906,22 +906,22 @@
     </div>
   </section>
 
-  <section class="mt-4 rounded-2xl border border-line bg-ink-900/60 p-5">
-    <h2 class="text-sm font-semibold text-cream">{i18n.t("settings.about")}</h2>
+  <section class="mt-4 card rounded-2xl p-5">
+    <h2 class="text-sm font-semibold text-text">{i18n.t("settings.about")}</h2>
     <dl class="mt-3 space-y-2 text-sm">
       <div class="flex justify-between">
         <dt class="text-muted">{i18n.t("settings.version")}</dt>
-        <dd class="tabular-nums text-cream">{info?.version ?? "0.2.0"}</dd>
+        <dd class="tabular-nums text-text">{info?.version ?? "0.2.0"}</dd>
       </div>
       <div class="flex justify-between">
         <dt class="text-muted">{i18n.t("settings.sources")}</dt>
-        <dd class="text-cream">{info?.providers.length ?? 3}</dd>
+        <dd class="text-text">{info?.providers.length ?? 3}</dd>
       </div>
     </dl>
     <button
       type="button"
       onclick={() => nav.go("credits")}
-      class="mt-4 flex items-center gap-2 rounded-xl border border-line px-3 py-2 text-xs text-muted transition-colors hover:border-gold/40 hover:text-gold"
+      class="mt-4 flex items-center gap-2 rounded-xl border border-line px-3 py-2 text-xs text-muted transition-colors hover:border-primary/40 hover:text-primary"
     >
       <Icon name="info" size={14} />
       {i18n.t("nav.credits")}

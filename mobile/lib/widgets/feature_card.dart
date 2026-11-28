@@ -35,7 +35,7 @@ class FeatureCard extends StatelessWidget {
                     height: 42,
                     decoration: BoxDecoration(
                       color: scheme.primary.withValues(alpha: 0.12),
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(12),
                       border: Border.all(
                         color: scheme.primary.withValues(alpha: 0.24),
                       ),

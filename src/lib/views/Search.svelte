@@ -63,11 +63,11 @@
 
 <div class="fade-in">
   <header>
-    <h1 class="text-2xl font-bold text-cream">{i18n.t("search.title")}</h1>
+    <h1 class="text-2xl font-bold text-text">{i18n.t("search.title")}</h1>
   </header>
 
   <label
-    class="mt-4 flex items-center gap-3 rounded-2xl border border-line bg-ink-900 px-4 py-3 focus-within:border-gold/50"
+    class="field mt-4 rounded-2xl px-4 py-3"
   >
     <Icon name="search" size={18} class="shrink-0 text-muted" />
     <input
@@ -75,13 +75,13 @@
       bind:value={term}
       aria-label={i18n.t("search.placeholder")}
       placeholder={i18n.t("search.placeholder")}
-      class="w-full bg-transparent text-base text-cream placeholder:text-muted/70 focus:outline-none"
+      class="w-full bg-transparent text-base text-text placeholder:text-muted/70 focus:outline-none"
     />
     {#if term}
       <button
         type="button"
         onclick={() => (term = "")}
-        class="rounded-lg p-1 text-muted hover:bg-ink-800 hover:text-cream"
+        class="rounded-lg p-1 text-muted hover:bg-primary-soft/60 hover:text-text"
         aria-label={i18n.t("common.close")}
       >
         <Icon name="x" size={15} />
@@ -94,10 +94,8 @@
       <button
         type="button"
         onclick={() => (filter = value as "all" | "quran" | "radio" | "music")}
-        class="rounded-full border px-3 py-1 text-[11px] transition-colors
-               {filter === value
-          ? 'border-gold/50 bg-gold/12 text-gold'
-          : 'border-line text-muted hover:border-gold/30 hover:text-cream'}"
+        class="chip"
+        data-active={filter === value ? "true" : "false"}
       >
         {i18n.t(key as "search.filterAll")}
       </button>
@@ -106,16 +104,16 @@
 
   {#if !term.trim()}
     <div class="mt-16 text-center">
-      <Icon name="search" size={34} class="mx-auto text-ink-700" />
+      <Icon name="search" size={34} class="mx-auto text-muted/60" />
       <p class="mt-3 text-sm text-muted">{i18n.t("search.hint")}</p>
     </div>
   {:else if failed}
-    <div class="mt-12 rounded-2xl border border-gold/30 bg-gold/[0.05] px-5 py-6 text-center">
+    <div class="card mt-12 rounded-2xl px-5 py-6 text-center">
       <p class="text-sm text-muted">{i18n.t("common.offline")}</p>
       <button
         type="button"
         onclick={() => (retryTick += 1)}
-        class="mt-3 rounded-lg border border-gold/40 px-3 py-1.5 text-xs text-gold"
+        class="btn btn-outline mt-3"
       >
         {i18n.t("common.retry")}
       </button>
@@ -124,14 +122,14 @@
     <div class="mt-8 space-y-1">
       {#each Array(6) as _, i (i)}
         <div class="flex animate-pulse items-center gap-3 px-2.5 py-2">
-          <div class="size-11 rounded-lg bg-ink-800"></div>
-          <div class="h-3 w-52 rounded bg-ink-800"></div>
+          <div class="size-11 rounded-lg bg-primary-soft"></div>
+          <div class="h-3 w-52 rounded bg-primary-soft"></div>
         </div>
       {/each}
     </div>
   {:else if !hasResults}
     <div class="mt-16 text-center">
-      <Icon name="search" size={34} class="mx-auto text-ink-700" />
+      <Icon name="search" size={34} class="mx-auto text-muted/60" />
       <p class="mt-3 text-sm text-muted">{i18n.t("search.empty")}</p>
     </div>
   {:else}
@@ -143,15 +141,15 @@
               type="button"
               onclick={() =>
                 nav.go("quran", "ayah", DEFAULT_AYAH_RECITER, surah.number)}
-              class="group flex items-center gap-3 rounded-xl border border-line/70 bg-ink-850/50 p-2.5 text-start transition-colors hover:border-gold/30 hover:bg-ink-800"
+              class="group flex items-center gap-3 rounded-xl border border-line bg-surface p-2.5 text-start shadow-card transition-colors hover:border-primary/35 hover:bg-primary-soft/30"
             >
               <span
-                class="grid size-11 shrink-0 place-items-center rounded-xl border border-line font-quran text-sm tabular-nums text-gold/80 group-hover:border-gold/40"
+                class="grid size-11 shrink-0 place-items-center rounded-xl border border-line font-quran text-sm tabular-nums text-accent-ink group-hover:border-primary/35"
               >
                 {fmtNumber(surah.number)}
               </span>
               <div class="min-w-0 flex-1">
-                <div class="truncate font-quran text-base text-cream group-hover:text-gold">
+                <div class="truncate font-quran text-base text-text group-hover:text-primary">
                   {shortName(surah.name)}
                 </div>
                 <div class="truncate text-[11px] text-muted">
@@ -171,7 +169,7 @@
             <button
               type="button"
               onclick={() => nav.go("quran", reciter.id)}
-              class="group flex items-center gap-3 rounded-xl border border-line/70 bg-ink-850/50 p-2.5 text-start transition-colors hover:border-gold/30 hover:bg-ink-800"
+              class="group flex items-center gap-3 rounded-xl border border-line bg-surface p-2.5 text-start shadow-card transition-colors hover:border-primary/35 hover:bg-primary-soft/30"
             >
               <Artwork
                 seed={reciter.name}
@@ -181,7 +179,7 @@
                 rounded="rounded-xl"
               />
               <div class="min-w-0 flex-1">
-                <div class="truncate font-quran text-base text-cream group-hover:text-gold">
+                <div class="truncate font-quran text-base text-text group-hover:text-primary">
                   {reciter.name}
                 </div>
                 <div class="truncate text-[11px] text-muted">{reciter.moshafs[0]?.name ?? ""}</div>
@@ -194,7 +192,7 @@
 
     {#if results.tracks.length}
       <Section title={i18n.t("search.tracks")}>
-        <div class="overflow-hidden rounded-2xl border border-line bg-ink-900/50 p-1.5">
+        <div class="card overflow-hidden rounded-2xl p-1.5">
           {#each results.tracks as track (track.id)}
             <TrackRow {track} queue={results.tracks} />
           {/each}

@@ -47,7 +47,7 @@
 
 <div
   class="group flex w-full items-center gap-2 rounded-xl px-2.5 py-2 transition-colors
-         {active ? 'bg-gold/10' : 'hover:bg-ink-800/70'}"
+         {active ? 'bg-primary-soft' : 'hover:bg-primary-soft/40'}"
 >
   <button
     type="button"
@@ -63,7 +63,7 @@
         rounded="rounded-lg"
       />
       <div
-        class="absolute inset-0 grid place-items-center rounded-lg bg-ink-950/70 opacity-0 transition-opacity group-hover:opacity-100
+        class="absolute inset-0 grid place-items-center rounded-lg bg-canvas/65 opacity-0 transition-opacity group-hover:opacity-100
                {active ? 'opacity-100' : ''}"
       >
         {#if active && player.playing}
@@ -71,22 +71,22 @@
             <i></i><i></i><i></i><i></i>
           </div>
         {:else}
-          <Icon name="play" size={16} class="text-gold" />
+          <Icon name="play" size={16} class="text-primary" />
         {/if}
       </div>
     </div>
 
     <div class="min-w-0 flex-1">
-      <div class="truncate text-[0.95rem] font-medium {active ? 'text-gold' : 'text-cream'}">
+      <div class="truncate text-[0.95rem] font-medium {active ? 'text-primary' : 'text-text'}">
         {track.title}
       </div>
       <div class="flex items-center gap-1.5 text-xs text-muted">
         <span class="truncate">{track.artist || (track.kind === "local" ? i18n.t("library.local") : "")}</span>
         {#if track.live}
           <span
-            class="flex shrink-0 items-center gap-1 rounded-md border border-teal/30 bg-teal/10 px-1.5 py-px text-[9px] font-semibold tracking-wide text-teal"
+            class="flex shrink-0 items-center gap-1 rounded-md border border-primary/25 bg-primary-soft px-1.5 py-px text-[9px] font-semibold tracking-wide text-primary"
           >
-            <span class="size-1 animate-pulse rounded-full bg-teal"></span>
+            <span class="size-1 animate-pulse rounded-full bg-primary"></span>
             {i18n.t("radio.live")}
           </span>
         {:else if track.subtitle}
@@ -94,7 +94,7 @@
         {/if}
         {#if track.license && (track.kind === "music" || track.kind === "anasheed")}
           <span
-            class="shrink-0 rounded border border-gold/25 bg-gold/8 px-1 py-px text-[9px] font-medium text-gold/90"
+            class="shrink-0 rounded border border-accent/30 bg-accent/8 px-1 py-px text-[9px] font-medium text-accent-ink"
             title={track.licenseUrl ?? track.license}
           >
             {track.license}
@@ -116,8 +116,8 @@
       aria-pressed={favorite}
       class="rounded-lg p-1.5 transition-all
              {favorite
-        ? 'text-gold'
-        : 'text-muted opacity-0 hover:text-cream group-hover:opacity-100 focus-visible:opacity-100'}"
+        ? 'text-accent-ink'
+        : 'text-muted opacity-0 hover:text-text group-hover:opacity-100 focus-visible:opacity-100'}"
     >
       <Icon name="heart" size={14} />
     </button>
@@ -136,20 +136,20 @@
         title={downloadHint()}
         class="rounded-lg p-1.5 transition-all
                {download?.status === 'done'
-          ? 'text-teal'
+          ? 'text-primary'
           : download?.status === 'error'
-            ? 'text-red-400'
+            ? 'text-red-500'
             : download?.status === 'cancelled'
-              ? 'text-muted hover:text-cream'
+              ? 'text-muted hover:text-text'
               : download
-                ? 'text-gold'
-                : 'text-muted opacity-0 hover:text-cream group-hover:opacity-100 focus-visible:opacity-100'}"
+                ? 'text-accent-ink'
+                : 'text-muted opacity-0 hover:text-text group-hover:opacity-100 focus-visible:opacity-100'}"
       >
         {#if download?.status === "queued" || download?.status === "downloading"}
           <span class="flex items-center gap-1 text-[9px] tabular-nums" title={i18n.t("library.cancelDownload")}>
             <span class="relative grid size-3.5 place-items-center">
-              <span class="absolute inset-0 animate-spin rounded-full border border-gold/30 border-t-gold"></span>
-              <span class="size-1 rounded-[1px] bg-gold"></span>
+              <span class="absolute inset-0 animate-spin rounded-full border border-accent/30 border-t-accent"></span>
+              <span class="size-1 rounded-[1px] bg-accent"></span>
             </span>
             {#if downloadPct > 0}{downloadPct}%{/if}
           </span>
@@ -165,7 +165,7 @@
       type="button"
       onclick={openPicker}
       aria-label={i18n.t("library.addToPlaylist")}
-      class="rounded-lg p-1.5 text-muted opacity-0 transition-all hover:text-cream group-hover:opacity-100 focus-visible:opacity-100"
+      class="rounded-lg p-1.5 text-muted opacity-0 transition-all hover:text-text group-hover:opacity-100 focus-visible:opacity-100"
     >
       <Icon name="list" size={14} />
     </button>
@@ -175,7 +175,7 @@
         type="button"
         onclick={onRemove}
         aria-label={i18n.t("library.remove")}
-        class="rounded-lg p-1.5 text-muted opacity-0 transition-all hover:text-red-400 group-hover:opacity-100 focus-visible:opacity-100"
+        class="rounded-lg p-1.5 text-muted opacity-0 transition-all hover:text-red-500 group-hover:opacity-100 focus-visible:opacity-100"
       >
         <Icon name="x" size={14} />
       </button>

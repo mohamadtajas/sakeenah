@@ -20,7 +20,7 @@
 <section class="mt-9 first:mt-0">
   <header class="mb-3.5 flex items-end justify-between gap-4">
     <div>
-      <h2 class="text-[1.05rem] font-bold tracking-tight text-cream">{title}</h2>
+      <h2 class="text-[1.05rem] font-bold tracking-tight text-text">{title}</h2>
       {#if subtitle}
         <p class="mt-0.5 text-xs text-muted">{subtitle}</p>
       {/if}
@@ -29,7 +29,7 @@
       <button
         type="button"
         onclick={onaction}
-        class="flex shrink-0 items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-muted transition-colors hover:bg-ink-800 hover:text-gold"
+        class="flex shrink-0 items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-muted transition-colors hover:bg-primary-soft/60 hover:text-primary"
       >
         {action}
         <Icon name="chevron" size={13} class="rtl:rotate-180" />

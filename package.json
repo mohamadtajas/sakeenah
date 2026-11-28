@@ -9,6 +9,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
+    "check:theme": "node scripts/check-theme-contrast.mjs",
     "tauri": "tauri",
     "app": "tauri dev",
     "dist": "tauri build",

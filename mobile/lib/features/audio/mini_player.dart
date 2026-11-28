@@ -25,7 +25,8 @@ class MiniPlayer extends StatelessWidget {
                   .clamp(0.0, 1.0)
             : null;
         return Material(
-          color: scheme.surfaceContainerHighest,
+          key: const ValueKey('mini-player-surface'),
+          color: scheme.surface,
           child: InkWell(
             onTap: () => Navigator.of(context).push(
               MaterialPageRoute<void>(

@@ -56,6 +56,8 @@ void main() {
     WidgetTester tester,
     Widget child, {
     Size size = const Size(320, 640),
+    Locale locale = const Locale('ar'),
+    ThemeData? theme,
   }) async {
     tester.view.physicalSize = size;
     tester.view.devicePixelRatio = 1;
@@ -63,7 +65,7 @@ void main() {
     addTearDown(tester.view.resetDevicePixelRatio);
     await tester.pumpWidget(
       MaterialApp(
-        locale: const Locale('ar'),
+        locale: locale,
         supportedLocales: AppLocalizations.supportedLocales,
         localizationsDelegates: const [
           AppLocalizations.delegate,
@@ -76,7 +78,7 @@ void main() {
               .copyWith(textScaler: const TextScaler.linear(2)),
           child: widget!,
         ),
-        theme: SakeenahTheme.dark(),
+        theme: theme ?? SakeenahTheme.dark(),
         home: child,
       ),
     );
@@ -101,6 +103,100 @@ void main() {
     }
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets(
+    'mobile worship and Quran surfaces keep the sanctuary radii and text contrast',
+    (tester) async {
+      await pump(
+        tester,
+        Scaffold(
+          body: DashboardPage(
+            onSelectTab: (_) {},
+            clock: () => DateTime.utc(2026, 11, 26, 3),
+          ),
+        ),
+        theme: SakeenahTheme.light(),
+      );
+      final prayerHero = tester.widget<Container>(
+        find.byKey(const ValueKey('dashboard-prayer-hero')),
+      );
+      expect(
+        (prayerHero.decoration! as BoxDecoration).borderRadius,
+        BorderRadius.circular(16),
+      );
+      expect(tester.takeException(), isNull);
+
+      await pump(
+        tester,
+        Scaffold(body: AdhkarPage(clock: () => DateTime.utc(2026, 11, 26, 9))),
+        theme: SakeenahTheme.light(),
+      );
+      final streakHeader = tester.widget<Container>(
+        find.byKey(const ValueKey('adhkar-streak-header')),
+      );
+      expect(
+        (streakHeader.decoration! as BoxDecoration).borderRadius,
+        BorderRadius.circular(16),
+      );
+      final today = tester.widget<Text>(find.text('أذكار اليوم'));
+      expect(
+        today.style?.color,
+        SakeenahTheme.light().colorScheme.onSecondaryContainer,
+      );
+      expect(tester.takeException(), isNull);
+
+      await pump(
+        tester,
+        const QuranReaderPage.surah(surah: 1),
+        theme: SakeenahTheme.light(),
+      );
+      final firstAyah = tester.widget<InkWell>(
+        find.byKey(const ValueKey('quran-ayah-1-1')),
+      );
+      expect(firstAyah.borderRadius, BorderRadius.circular(12));
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets(
+    'dashboard, Mushaf and adhkar fit 320x640 at 2x in Arabic and English themes',
+    (tester) async {
+      for (final locale in const [Locale('ar'), Locale('en')]) {
+        for (final theme in [SakeenahTheme.light(), SakeenahTheme.dark()]) {
+          await pump(
+            tester,
+            Scaffold(
+              body: DashboardPage(
+                onSelectTab: (_) {},
+                clock: () => DateTime.utc(2026, 11, 26, 3),
+              ),
+            ),
+            locale: locale,
+            theme: theme,
+          );
+          expect(tester.takeException(), isNull, reason: 'dashboard $locale');
+
+          await pump(
+            tester,
+            const Scaffold(body: MushafPage()),
+            locale: locale,
+            theme: theme,
+          );
+          expect(tester.takeException(), isNull, reason: 'Mushaf $locale');
+
+          await pump(
+            tester,
+            Scaffold(
+              body: AdhkarPage(clock: () => DateTime.utc(2026, 11, 26, 9)),
+            ),
+            locale: locale,
+            theme: theme,
+          );
+          expect(tester.takeException(), isNull, reason: 'adhkar $locale');
+        }
+      }
+    },
+  );
 
   testWidgets('adhkar catalog fits a small phone at 2x text', (tester) async {
     await pump(
@@ -152,6 +248,72 @@ void main() {
     await pump(tester, Scaffold(body: AudioPage(playback: playback)));
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets(
+    'audio player and settings fit 320x640 at 2x in Arabic and English themes',
+    (tester) async {
+      await playback.playQueue([
+        const AudioTrack(
+          id: 'polish',
+          reciterId: 'Alafasy_128kbps',
+          reciterName: 'مشاري العفاسي',
+          surah: 1,
+          ayah: 1,
+          surahName: 'الفاتحة',
+          url: 'https://example.test/001001.mp3',
+        ),
+      ]);
+
+      for (final locale in const [Locale('ar'), Locale('en')]) {
+        for (final theme in [SakeenahTheme.light(), SakeenahTheme.dark()]) {
+          await pump(
+            tester,
+            Scaffold(body: AudioPage(playback: playback)),
+            locale: locale,
+            theme: theme,
+          );
+          expect(tester.takeException(), isNull, reason: 'audio $locale');
+
+          await pump(
+            tester,
+            PlayerPage(playback: playback),
+            locale: locale,
+            theme: theme,
+          );
+          expect(tester.takeException(), isNull, reason: 'player $locale');
+
+          final scheduler = AdhanScheduler(
+            preferences: AdhanSettingsRepository(AppServices.current.database),
+            settings: AppServices.current.prayerSettings,
+            service: FakeNotificationService(),
+          );
+          await pump(
+            tester,
+            SettingsPage(
+              themeMode: theme.brightness == Brightness.dark
+                  ? ThemeMode.dark
+                  : ThemeMode.light,
+              onThemeChanged: (_) {},
+              locale: locale,
+              onLocaleChanged: (_) {},
+              location: AppServices.current.location,
+              adhanScheduler: scheduler,
+            ),
+            locale: locale,
+            theme: theme,
+          );
+          for (var index = 0; index < 8; index++) {
+            await tester.drag(
+              find.byType(Scrollable).first,
+              const Offset(0, -300),
+            );
+            await tester.pump(const Duration(milliseconds: 80));
+            expect(tester.takeException(), isNull, reason: 'settings $locale');
+          }
+        }
+      }
+    },
+  );
 
   testWidgets('audio player and mini-player fit at 2x text', (tester) async {
     await playback.playQueue([

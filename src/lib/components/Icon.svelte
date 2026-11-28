@@ -2,6 +2,7 @@
   export const icons = {
     home: '<path d="M3 10.4 12 3l9 7.4V20a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>',
     search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/>',
+    menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
     book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
     radio:
       '<rect x="2.5" y="8.5" width="19" height="12.5" rx="2.5"/><circle cx="8.5" cy="14.75" r="2.4"/><path d="M15.5 12.5h3M15.5 17h3M7 8.5 17 3"/>',

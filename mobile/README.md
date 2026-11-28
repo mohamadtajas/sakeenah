@@ -6,13 +6,19 @@ and prayer calculations but not the desktop runtime.
 
 ## Status
 
-Phase **M7** - widgets, polished audio, adhkar reminders and adhan sounds.
+Phase **M7** - widgets, polished audio, adhkar reminders and adhan sounds,
+with the Alabaster / Sanctuary Emerald visual system.
 
-- Arabic-first UI with `flutter_localizations` and generated ARB accessors.
+- Arabic-first UI with a persistent AR/EN switch and full RTL/LTR mirroring
+  through `flutter_localizations` and generated ARB accessors.
 - Bottom navigation: Dashboard, Mushaf, Adhkar, Audio.
-- The owner palette in light (deep green `#0F4B35`, ivory `#F9F8F5`, gold
-  `#C5A059`, ink `#12241F`, sand `#ECE7DB`) with a derived dark theme of ivory
-  on deep green-black and gold accents.
+- Alabaster light theme: canvas `#F7F5F0`, white surfaces, emerald primary
+  `#145349` with soft `#E6F0ED`, gold accent `#B88E3B` (gold ink `#6B511A`
+  for small labels), ink `#1B2422`, muted `#5A6864` and line `#E5E0D5`.
+  The Sanctuary dark theme uses deep green-black surfaces, light emerald
+  actions and a warmer gold accent.
+- 16 px cards, 12 px controls, an 8 px spacing rhythm and emerald/gold focus
+  and active states, with reduced-motion-aware transitions.
 - Tajawal for UI text and Amiri Quran for Quranic text, both bundled offline.
 - Drift database with tested schema migrations and bundled content seeding.
 - Offline prayer methods, Hijri conversion and qibla bearings.
@@ -224,8 +230,10 @@ Captured on an Android 16 (API 36) emulator at 1080x2400 in Arabic RTL.
 ## Localisation
 
 `lib/l10n/app_ar.arb` is the template. Add a key there first, then mirror it in
-`app_en.arb`. Arabic is the only locale shipped in v1; English stays complete so
-a later release can enable it without reworking screens.
+`app_en.arb`. Arabic is the default locale; English ships with the app and both
+directions are mirrored through `MaterialApp.locale`. The header AR/EN switch
+and Settings language control persist the choice in `ui.locale`, and unsupported
+saved values fall back to Arabic.
 
 ## CI
 

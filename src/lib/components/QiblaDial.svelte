@@ -73,7 +73,7 @@
   </div>
 
   <div class="min-w-0 flex-1">
-    <p class="text-sm font-semibold text-cream">{i18n.t("prayer.qiblaBearing", { degrees: fmtNumber(degrees) })}</p>
+    <p class="text-sm font-semibold text-text">{i18n.t("prayer.qiblaBearing", { degrees: fmtNumber(degrees) })}</p>
     <p class="mt-1 text-xs leading-relaxed text-muted">{i18n.t("prayer.qiblaHint")}</p>
 
     <label class="mt-4 block text-[11px] text-muted" for="qibla-heading">{i18n.t("prayer.qiblaHeading")}</label>
@@ -81,7 +81,7 @@
       <button
         type="button"
         onclick={() => (heading = (heading + 345) % 360)}
-        class="grid size-8 shrink-0 place-items-center rounded-lg border border-line text-muted transition-colors hover:border-gold/40 hover:text-gold"
+        class="grid size-8 shrink-0 place-items-center rounded-lg border border-line text-muted transition-colors hover:border-primary/40 hover:text-primary"
         aria-label={i18n.t("prayer.qiblaRotateLeft")}
       >
         <Icon name="chevron" size={14} class="rotate-180 rtl:rotate-0" />
@@ -93,12 +93,12 @@
         max="359"
         step="1"
         bind:value={heading}
-        class="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-ink-700 accent-gold"
+        class="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-line accent-[var(--color-accent)]"
       />
       <button
         type="button"
         onclick={() => (heading = (heading + 15) % 360)}
-        class="grid size-8 shrink-0 place-items-center rounded-lg border border-line text-muted transition-colors hover:border-gold/40 hover:text-gold"
+        class="grid size-8 shrink-0 place-items-center rounded-lg border border-line text-muted transition-colors hover:border-primary/40 hover:text-primary"
         aria-label={i18n.t("prayer.qiblaRotateRight")}
       >
         <Icon name="chevron" size={14} />
@@ -106,7 +106,7 @@
       <button
         type="button"
         onclick={() => (heading = 0)}
-        class="shrink-0 rounded-lg border border-line px-2.5 py-1.5 text-[10px] text-muted transition-colors hover:border-gold/40 hover:text-gold"
+        class="shrink-0 rounded-lg border border-line px-2.5 py-1.5 text-[10px] text-muted transition-colors hover:border-primary/40 hover:text-primary"
       >
         {i18n.t("prayer.qiblaReset")}
       </button>

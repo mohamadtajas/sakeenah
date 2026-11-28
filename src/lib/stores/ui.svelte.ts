@@ -1,7 +1,9 @@
 const THEME_KEY = "sakeenah.theme";
 
 class UiStore {
-  theme = $state<"dark" | "light">("dark");
+  theme = $state<"dark" | "light">("light");
+  /** Narrow-window navigation drawer. */
+  sidebarOpen = $state(false);
   /** Transient message shown above the player bar. */
   toast = $state<string | null>(null);
   private toastTimer: ReturnType<typeof setTimeout> | null = null;
@@ -31,6 +33,10 @@ class UiStore {
 
   toggleTheme() {
     this.setTheme(this.theme === "dark" ? "light" : "dark");
+  }
+
+  toggleSidebar(open = !this.sidebarOpen) {
+    this.sidebarOpen = open;
   }
 
   private apply() {

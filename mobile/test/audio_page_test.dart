@@ -96,6 +96,22 @@ void main() {
     expect(playback.playing, isTrue);
   });
 
+  testWidgets('selected audio mode uses the emerald soft active surface', (
+    tester,
+  ) async {
+    await pump(tester, AudioPage(playback: playback));
+
+    final finder = find.byKey(const ValueKey('audio-mode-quran'));
+    final chip = tester.widget<ChoiceChip>(finder);
+    final scheme = Theme.of(tester.element(finder)).colorScheme;
+    final label = chip.label as Text;
+
+    expect(chip.selected, isTrue);
+    expect(chip.selectedColor, scheme.primaryContainer);
+    expect(label.style?.color, scheme.onPrimaryContainer);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('player controls speed, repeat and play/pause', (tester) async {
     await playback.playQueue(tracks());
     await pump(tester, PlayerPage(playback: playback));
@@ -114,6 +130,18 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('audio-repeat')));
     await tester.pumpAndSettle();
     expect(playback.repeat, AudioRepeatMode.one);
+  });
+
+  testWidgets('primary transport uses emerald, not gold', (tester) async {
+    await playback.playQueue(tracks());
+    await pump(tester, PlayerPage(playback: playback));
+
+    final finder = find.byKey(const ValueKey('audio-toggle'));
+    final toggle = tester.widget<IconButton>(finder);
+    final scheme = Theme.of(tester.element(finder)).colorScheme;
+
+    expect(toggle.style?.backgroundColor?.resolve({}), scheme.primary);
+    expect(toggle.style?.foregroundColor?.resolve({}), scheme.onPrimary);
   });
 
   testWidgets('unknown duration disables seek and shows a placeholder', (
@@ -193,6 +221,16 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('الفاتحة'), findsOneWidget);
     expect(find.byKey(const ValueKey('mini-toggle')), findsOneWidget);
+  });
+
+  testWidgets('mini player uses the elevated surface layer', (tester) async {
+    await playback.playQueue(tracks());
+    await pump(tester, MiniPlayer(playback: playback));
+
+    final surface = tester.widget<Material>(
+      find.byKey(const ValueKey('mini-player-surface')),
+    );
+    expect(surface.color, SakeenahTheme.dark().colorScheme.surface);
   });
 
   testWidgets('player surfaces a playback error and retries', (tester) async {

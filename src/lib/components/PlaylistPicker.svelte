@@ -67,18 +67,18 @@
 
 <div
   bind:this={panel}
-  class="fade-in fixed z-50 w-[268px] overflow-hidden rounded-xl border border-line bg-ink-900/98 shadow-2xl shadow-black/50 backdrop-blur"
+  class="fade-in fixed z-50 w-[268px] overflow-hidden rounded-xl border border-line bg-surface shadow-pop backdrop-blur"
   style="top: {y}px; left: {x}px"
   role="dialog"
   aria-modal="true"
   aria-label={i18n.t("library.addToPlaylist")}
 >
   <div class="flex items-center justify-between border-b border-line px-3 py-2">
-    <span class="text-[11px] font-semibold text-cream">{i18n.t("library.addToPlaylist")}</span>
+    <span class="text-[11px] font-semibold text-text">{i18n.t("library.addToPlaylist")}</span>
     <button
       type="button"
       onclick={onclose}
-      class="rounded p-1 text-muted transition-colors hover:bg-ink-800 hover:text-cream"
+      class="rounded p-1 text-muted transition-colors hover:bg-primary-soft/60 hover:text-text"
       aria-label={i18n.t("library.cancel")}
     >
       <Icon name="x" size={13} />
@@ -91,12 +91,12 @@
       bind:value={name}
       aria-label={i18n.t("library.playlistName")}
       placeholder={i18n.t("library.playlistName")}
-      class="min-w-0 flex-1 bg-transparent px-1 text-xs text-cream placeholder:text-muted/70 focus:outline-none"
+      class="min-w-0 flex-1 bg-transparent px-1 text-xs text-text placeholder:text-muted/70 focus:outline-none"
     />
     <button
       type="submit"
       disabled={!name.trim() || busy}
-      class="rounded-md bg-gold px-2 py-1 text-[10px] font-semibold text-ink-950 disabled:opacity-40"
+      class="btn btn-primary min-h-0 rounded-md px-2 py-1 text-[10px]"
     >
       {i18n.t("library.create")}
     </button>
@@ -110,10 +110,10 @@
         <button
           type="button"
           onclick={() => add(playlist.id)}
-          class="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-start transition-colors hover:bg-ink-800"
+          class="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-start transition-colors hover:bg-primary-soft/60"
         >
           <Icon name="list" size={13} class="shrink-0 text-muted" />
-          <span class="min-w-0 flex-1 truncate text-xs text-cream">{playlist.name}</span>
+          <span class="min-w-0 flex-1 truncate text-xs text-text">{playlist.name}</span>
           <span class="shrink-0 text-[10px] tabular-nums text-muted">{playlist.trackCount}</span>
         </button>
       {/each}

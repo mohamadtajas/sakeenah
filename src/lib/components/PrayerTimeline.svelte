@@ -32,16 +32,16 @@
     {@const done = isDone(row.key)}
     <div
       class="flex items-center gap-3 py-2.5
-             {row.key === nextKey ? 'rounded-xl bg-gold/[0.04] px-2' : ''}"
+             {row.key === nextKey ? 'rounded-xl bg-accent/5 px-2' : ''}"
     >
-      <span class="w-14 shrink-0 text-[13px] font-semibold tabular-nums {row.passed ? 'text-muted' : 'text-cream'}">
+      <span class="w-14 shrink-0 text-[13px] font-semibold tabular-nums {row.passed ? 'text-muted' : 'text-text'}">
         {row.time}
       </span>
 
       <span class="flex min-w-0 flex-1 items-center gap-2">
-        <span class="text-sm {done ? 'text-teal' : 'text-cream'}">{label(row.key)}</span>
+        <span class="text-sm {done ? 'text-primary' : 'text-text'}">{label(row.key)}</span>
         {#if row.key === nextKey}
-          <span class="rounded-full bg-gold/10 px-1.5 py-0.5 text-[9px] font-semibold text-gold">
+          <span class="pill pill-accent">
             {i18n.t("prayer.next")}
           </span>
         {/if}
@@ -56,8 +56,8 @@
           onclick={() => ontoggle(row.key)}
           class="grid size-8 shrink-0 place-items-center rounded-full border transition-colors
                  {done
-            ? 'border-teal/50 bg-teal/15 text-teal'
-            : 'border-line text-muted/40 hover:border-gold/40 hover:text-gold'} disabled:opacity-50"
+            ? 'border-primary/50 bg-primary-soft text-primary'
+            : 'border-line text-muted/40 hover:border-primary/40 hover:text-primary'} disabled:opacity-50"
         >
           <Icon name="check" size={15} />
         </button>
