@@ -13,7 +13,7 @@
 <button
   type="button"
   onclick={onplay}
-  class="group flex w-[190px] items-center gap-3 rounded-xl border border-line/70 bg-ink-850/60 p-2.5 text-start transition-colors hover:border-gold/30 hover:bg-ink-800"
+  class="group flex w-[190px] items-center gap-3 rounded-xl border border-line bg-surface p-2.5 text-start shadow-card transition-colors hover:border-primary/35 hover:bg-primary-soft/30"
 >
   <Artwork
     url={track.artworkUrl}
@@ -23,13 +23,13 @@
     rounded="rounded-lg"
   />
   <div class="min-w-0 flex-1">
-    <div class="truncate text-[0.82rem] font-medium text-cream group-hover:text-gold">
+    <div class="truncate text-[0.82rem] font-medium text-text group-hover:text-primary">
       {track.title}
     </div>
     <div class="mt-0.5 flex items-center gap-1.5">
       {#if track.live}
-        <span class="flex items-center gap-1 text-[10px] font-semibold text-teal">
-          <span class="size-1.5 animate-pulse rounded-full bg-teal"></span>
+        <span class="flex items-center gap-1 text-[10px] font-semibold text-primary">
+          <span class="size-1.5 animate-pulse rounded-full bg-primary"></span>
           {i18n.t("radio.live")}
         </span>
       {:else}

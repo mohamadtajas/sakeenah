@@ -305,9 +305,10 @@ class _PrayerHero extends StatelessWidget {
     final scheme = Theme.of(context).colorScheme;
     final next = schedule.nextAt(nowUtc);
     return Container(
+      key: const ValueKey('dashboard-prayer-hero'),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(26),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(color: scheme.outline),
         gradient: LinearGradient(
           begin: AlignmentDirectional.topStart,

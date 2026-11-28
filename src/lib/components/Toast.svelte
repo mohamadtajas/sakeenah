@@ -9,7 +9,7 @@
     aria-live="polite"
   >
     <div
-      class="fade-in max-w-[420px] rounded-xl border border-line bg-ink-850/98 px-4 py-2.5 text-center text-xs text-cream shadow-xl shadow-black/40 backdrop-blur"
+      class="fade-in max-w-[420px] rounded-xl border border-line bg-surface px-4 py-2.5 text-center text-xs text-text shadow-pop backdrop-blur"
     >
       {ui.toast}
     </div>

@@ -248,9 +248,10 @@ class _StreakHeader extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final scheme = Theme.of(context).colorScheme;
     return Container(
+      key: const ValueKey('adhkar-streak-header'),
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(color: scheme.outline),
         gradient: LinearGradient(
           begin: AlignmentDirectional.topStart,
@@ -269,6 +270,7 @@ class _StreakHeader extends StatelessWidget {
               _HeaderLabel(
                 icon: Icons.nights_stay_rounded,
                 color: scheme.secondary,
+                textColor: scheme.onSecondaryContainer,
                 text: l10n.adhkarToday,
               ),
               _HeaderLabel(
@@ -314,12 +316,14 @@ class _HeaderLabel extends StatelessWidget {
     required this.color,
     required this.text,
     this.small = false,
+    this.textColor,
   });
 
   final IconData icon;
   final Color color;
   final String text;
   final bool small;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -337,7 +341,7 @@ class _HeaderLabel extends StatelessWidget {
             style: TextStyle(
               fontSize: small ? 10 : 12,
               fontWeight: small ? FontWeight.w400 : FontWeight.w700,
-              color: small ? scheme.onSurfaceVariant : color,
+              color: textColor ?? (small ? scheme.onSurfaceVariant : color),
             ),
           ),
         ),
@@ -497,7 +501,7 @@ class _FeaturedCard extends StatelessWidget {
                     height: 38,
                     decoration: BoxDecoration(
                       color: scheme.primary.withValues(alpha: 0.12),
-                      borderRadius: BorderRadius.circular(13),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                     child: Icon(
                       _iconFor(category.id),

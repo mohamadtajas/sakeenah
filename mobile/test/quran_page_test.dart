@@ -101,6 +101,10 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('لم تبدأ القراءة بعد'), findsOneWidget);
     expect(find.text('آية اليوم'), findsOneWidget);
+    final dailyAyah = tester.widget<InkWell>(
+      find.byKey(const ValueKey('quran-daily-ayah-card')),
+    );
+    expect(dailyAyah.borderRadius, BorderRadius.circular(16));
   });
 }
 

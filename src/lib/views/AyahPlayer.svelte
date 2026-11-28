@@ -92,7 +92,7 @@
   <button
     type="button"
     onclick={() => nav.go("quran", "ayah", reciter.id)}
-    class="mb-5 flex items-center gap-1.5 text-xs text-muted transition-colors hover:text-gold"
+    class="mb-5 flex items-center gap-1.5 text-xs text-muted transition-colors hover:text-primary"
   >
     <Icon name="chevron" size={13} class="rotate-180 rtl:rotate-0" />
     {i18n.t("quran.surahs")} · {reciter.name}
@@ -100,10 +100,10 @@
 
   <header class="flex flex-wrap items-end gap-4">
     <div class="min-w-0 flex-1">
-      <p class="text-[10px] font-bold uppercase tracking-[0.22em] text-gold/80">
+      <p class="text-[10px] font-bold uppercase tracking-[0.22em] text-accent-ink">
         {i18n.t("quran.byAyah")}
       </p>
-      <h1 class="mt-1 pb-1 font-quran text-3xl leading-[1.5] text-cream">
+      <h1 class="mt-1 pb-1 font-quran text-3xl leading-[1.5] text-text">
         {surah.name}
       </h1>
       <p class="mt-1 text-xs text-muted">
@@ -121,7 +121,7 @@
       onclick={() =>
         player.play(tracks[Math.max(0, hifz.lastAyah - 1)] ?? tracks[0], tracks)}
       disabled={!tracks.length}
-      class="flex items-center gap-2 rounded-xl bg-gold px-4 py-2.5 text-sm font-semibold text-ink-950 transition-transform hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+      class="btn btn-primary"
     >
       <Icon name="play" size={14} />
       {i18n.t("player.play")}
@@ -129,20 +129,20 @@
   </header>
 
   <!-- Memorisation panel -->
-  <section class="mt-5 rounded-2xl border border-line bg-ink-900/60 p-4">
+  <section class="card mt-5 rounded-2xl p-4">
     <div class="flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-2">
-        <Icon name="bookmark" size={15} class="text-gold/80" />
-        <h2 class="text-sm font-semibold text-cream">{i18n.t("quran.hifz")}</h2>
+        <Icon name="bookmark" size={15} class="text-primary" />
+        <h2 class="text-sm font-semibold text-text">{i18n.t("quran.hifz")}</h2>
       </div>
       <div class="flex items-center gap-2 text-[11px] text-muted">
         <span>{i18n.t("quran.progress")}</span>
-        <span class="tabular-nums text-cream">
+        <span class="tabular-nums text-text">
           {fmtNumber(hifz.count)} / {fmtNumber(surah.ayahs)}
         </span>
-        <span class="h-1.5 w-24 overflow-hidden rounded-full bg-ink-800">
+        <span class="h-1.5 w-24 overflow-hidden rounded-full bg-line">
           <span
-            class="block h-full rounded-full bg-gold transition-[width] duration-300"
+            class="block h-full rounded-full bg-accent transition-[width] duration-300"
             style="width: {memorisedPct}%"
           ></span>
         </span>
@@ -155,7 +155,7 @@
         <select
           value={hifz.from}
           onchange={(e) => hifz.setRange(Number(e.currentTarget.value), hifz.to)}
-          class="min-w-16 rounded-lg border border-line bg-ink-850 px-2 py-1.5 text-sm tabular-nums text-cream focus:border-gold/50 focus:outline-none"
+          class="min-w-16 rounded-lg border border-line bg-surface px-2 py-1.5 text-sm tabular-nums text-text focus:border-primary/60 focus:outline-none"
         >
           {#each ayahs as a (a.number)}
             <option value={a.number}>{fmtNumber(a.number)}</option>
@@ -168,7 +168,7 @@
         <select
           value={hifz.to}
           onchange={(e) => hifz.setRange(hifz.from, Number(e.currentTarget.value))}
-          class="min-w-16 rounded-lg border border-line bg-ink-850 px-2 py-1.5 text-sm tabular-nums text-cream focus:border-gold/50 focus:outline-none"
+          class="min-w-16 rounded-lg border border-line bg-surface px-2 py-1.5 text-sm tabular-nums text-text focus:border-primary/60 focus:outline-none"
         >
           {#each ayahs as a (a.number)}
             <option value={a.number}>{fmtNumber(a.number)}</option>
@@ -181,7 +181,7 @@
         <select
           value={hifz.passes}
           onchange={(e) => hifz.setPasses(Number(e.currentTarget.value))}
-          class="min-w-16 rounded-lg border border-line bg-ink-850 px-2 py-1.5 text-sm tabular-nums text-cream focus:border-gold/50 focus:outline-none"
+          class="min-w-16 rounded-lg border border-line bg-surface px-2 py-1.5 text-sm tabular-nums text-text focus:border-primary/60 focus:outline-none"
         >
           {#each PASS_OPTIONS as n (n)}
             <option value={n}>{fmtNumber(n)}</option>
@@ -193,12 +193,12 @@
         <button
           type="button"
           onclick={() => (hifz.active = false)}
-          class="flex items-center gap-1.5 rounded-lg border border-gold/50 bg-gold/12 px-3 py-2 text-xs font-semibold text-gold"
+          class="flex items-center gap-1.5 rounded-lg border border-primary/40 bg-primary-soft px-3 py-2 text-xs font-semibold text-primary"
         >
           <Icon name="pause" size={12} />
           {i18n.t("quran.stopLoop")}
           {#if hifz.passesLeft > 0 && hifz.passes > 1}
-            <span class="tabular-nums text-gold/70">
+            <span class="tabular-nums text-primary/70">
               · {fmtNumber(hifz.passesLeft)} {i18n.t("quran.pass")}
             </span>
           {/if}
@@ -208,7 +208,7 @@
           type="button"
           onclick={startLoop}
           disabled={!tracks.length}
-          class="flex items-center gap-1.5 rounded-lg border border-line px-3 py-2 text-xs font-semibold text-cream transition-colors hover:border-gold/40 hover:text-gold disabled:opacity-50"
+          class="flex items-center gap-1.5 rounded-lg border border-line px-3 py-2 text-xs font-semibold text-text transition-colors hover:border-primary/40 hover:text-primary disabled:opacity-50"
         >
           <Icon name="repeat" size={12} />
           {i18n.t("quran.startLoop")}
@@ -219,14 +219,14 @@
         <button
           type="button"
           onclick={() => hifz.markRange()}
-          class="rounded-lg border border-teal/40 bg-teal/10 px-3 py-2 text-xs font-semibold text-teal transition-colors hover:bg-teal/15"
+          class="rounded-lg border border-primary/40 bg-primary-soft px-3 py-2 text-xs font-semibold text-primary transition-colors hover:bg-primary-soft/70"
         >
           {i18n.t("quran.markRange")}
         </button>
         <button
           type="button"
           onclick={() => hifz.clearRange()}
-          class="rounded-lg border border-line px-2.5 py-2 text-xs text-muted transition-colors hover:border-line hover:text-cream"
+          class="rounded-lg border border-line px-2.5 py-2 text-xs text-muted transition-colors hover:border-line hover:text-text"
         >
           {i18n.t("quran.clearRange")}
         </button>
@@ -234,7 +234,7 @@
     </div>
 
     {#if hifz.justCompleted}
-      <p class="mt-3 flex items-center gap-1.5 rounded-lg bg-teal/8 px-3 py-2 text-[11px] text-teal">
+      <p class="mt-3 flex items-center gap-1.5 rounded-lg bg-primary-soft px-3 py-2 text-[11px] text-primary">
         <Icon name="check" size={12} />
         {i18n.t("quran.loopDone")}
       </p>
@@ -251,8 +251,8 @@
       onclick={toggleTranslation}
       class="flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-[11px] transition-colors
              {showTranslation
-        ? 'border-gold/40 bg-gold/10 text-gold'
-        : 'border-line text-muted hover:text-cream'}"
+        ? 'border-primary/40 bg-primary-soft text-primary'
+        : 'border-line text-muted hover:text-text'}"
     >
       {i18n.t("quran.translation")}
     </button>
@@ -265,7 +265,7 @@
   {#if loading}
     <div class="mt-4 space-y-3">
       {#each Array(6) as _, i (i)}
-        <div class="h-20 animate-pulse rounded-xl bg-ink-900"></div>
+        <div class="h-20 animate-pulse rounded-xl border border-line bg-surface"></div>
       {/each}
     </div>
   {:else if textError}
@@ -273,7 +273,7 @@
   {:else}
     <div
       bind:this={container}
-      class="no-scrollbar mt-3 max-h-[54vh] space-y-1.5 overflow-y-auto rounded-2xl border border-line bg-ink-900/40 p-2"
+      class="no-scrollbar card mt-3 max-h-[54vh] space-y-1.5 overflow-y-auto rounded-2xl p-2"
     >
       {#each ayahs as ayah (ayah.number)}
         {@const active = currentAyah === ayah.number}
@@ -281,7 +281,7 @@
         <div
           data-ayah={ayah.number}
           class="group flex w-full items-start gap-2 rounded-xl px-3 py-3 transition-colors
-                 {active ? 'bg-gold/10 ring-1 ring-gold/30' : 'hover:bg-ink-800/70'}"
+                 {active ? 'bg-primary-soft ring-1 ring-primary/25' : 'hover:bg-primary-soft/35'}"
         >
           <button
             type="button"
@@ -289,8 +289,8 @@
             aria-label={`${i18n.t("quran.playAyah")} ${surah.number}:${ayah.number}`}
             class="mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg border text-[10px] tabular-nums transition-colors
                    {active
-              ? 'border-gold/50 bg-gold/15 text-gold'
-              : 'border-line text-muted group-hover:border-gold/30 group-hover:text-gold'}"
+              ? 'border-primary/45 bg-primary-soft text-primary'
+              : 'border-line text-muted group-hover:border-primary/30 group-hover:text-primary'}"
           >
             {#if active && player.playing}
               <span class="eq"><i></i><i></i><i></i><i></i></span>
@@ -304,8 +304,8 @@
               dir="rtl"
               lang="ar"
               class="font-quran text-[1.35rem] leading-[2.1] {active
-                ? 'text-cream'
-                : 'text-cream/85'}"
+                ? 'text-text'
+                : 'text-text/85'}"
             >
               {ayah.text}
             </p>
@@ -315,7 +315,7 @@
               </p>
             {/if}
             {#if ayah.sajda}
-              <span class="mt-1 inline-block rounded border border-teal/30 px-1.5 py-px text-[9px] text-teal">
+              <span class="mt-1 inline-block rounded border border-primary/30 px-1.5 py-px text-[9px] text-primary">
                 {i18n.t("quran.sajda")}
               </span>
             {/if}
@@ -326,7 +326,7 @@
             onclick={() => hifz.toggleMemorized(ayah.number)}
             aria-label={`${i18n.t("quran.memorized")} ${surah.number}:${ayah.number}`}
             class="mt-1 shrink-0 rounded-full p-1 transition-colors
-                   {memorised ? 'text-teal' : 'text-muted/40 hover:text-muted'}"
+                   {memorised ? 'text-primary' : 'text-muted/40 hover:text-muted'}"
           >
             <Icon name={memorised ? "check" : "bookmark"} size={11} />
           </button>

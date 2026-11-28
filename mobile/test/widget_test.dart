@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:drift/native.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
@@ -55,6 +56,120 @@ void main() {
     expect(find.text('السور'), findsOneWidget);
     expect(find.text('الفاتحة'), findsWidgets);
   });
+
+  testWidgets(
+    'language switch defaults invalid locale to Arabic and persists English',
+    (tester) async {
+      const homeWidgetUpdates = MethodChannel('home_widget/updates');
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(homeWidgetUpdates, (_) async => null);
+      addTearDown(
+        () => TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+            .setMockMethodCallHandler(homeWidgetUpdates, null),
+      );
+
+      Directory? directory;
+      var baselineRestored = false;
+
+      Future<AppServices> restoreBaseline() async {
+        final baseline = (await tester.runAsync(
+          () => AppServices.initialize(
+            database: AppDatabase.memory(),
+            bundle: _FileAssetBundle(),
+            playback: PlaybackController(FakeAudioEngine()),
+          ),
+        ))!;
+        await tester.runAsync(
+          () => baseline.updatePrayerSettings(
+            PrayerSettings.defaults().copyWith(configured: true),
+          ),
+        );
+        return baseline;
+      }
+
+      addTearDown(() async {
+        if (baselineRestored) return;
+        await tester.pumpWidget(const SizedBox.shrink());
+        await AppServices.shutdown();
+        final tempDirectory = directory;
+        if (tempDirectory != null && tempDirectory.existsSync()) {
+          await tester.runAsync(() => tempDirectory.delete(recursive: true));
+        }
+        await restoreBaseline();
+      });
+
+      await AppServices.shutdown();
+      directory = (await tester.runAsync(
+        () => Directory.systemTemp.createTemp('sakeenah_locale_test'),
+      ))!;
+      final databaseFile = File(
+        '${directory.path}${Platform.pathSeparator}app.sqlite',
+      );
+
+      await tester.runAsync(() async {
+        final seeded = AppDatabase(NativeDatabase(databaseFile));
+        await SettingsStore.write(seeded, 'ui.locale', 'fr');
+        await seeded.close();
+      });
+
+      Future<AppServices> initialize() => AppServices.initialize(
+        database: AppDatabase(NativeDatabase(databaseFile)),
+        bundle: _FileAssetBundle(),
+        playback: PlaybackController(FakeAudioEngine()),
+      );
+
+      var services = (await tester.runAsync(initialize))!;
+      await tester.runAsync(
+        () => services.updatePrayerSettings(
+          PrayerSettings.defaults().copyWith(configured: true),
+        ),
+      );
+      await tester.pumpWidget(const SakeenahApp());
+      await pumpUi(tester);
+
+      expect(find.text('الرئيسية'), findsWidgets);
+      expect(
+        Directionality.of(tester.element(find.text('الرئيسية').last)),
+        TextDirection.rtl,
+      );
+      expect(find.byKey(const ValueKey('language-toggle')), findsOneWidget);
+      expect(find.text('EN'), findsOneWidget);
+
+      await tester.tap(find.byKey(const ValueKey('language-toggle')));
+      await pumpUi(tester);
+      expect(find.text('Home'), findsWidgets);
+      expect(
+        Directionality.of(tester.element(find.text('Home').last)),
+        TextDirection.ltr,
+      );
+      await tester.pumpWidget(const SizedBox.shrink());
+      expect(await SettingsStore.read(services.database, 'ui.locale'), 'en');
+
+      await tester.pumpWidget(const SizedBox.shrink());
+      await AppServices.shutdown();
+      services = (await tester.runAsync(initialize))!;
+      await tester.runAsync(
+        () => services.updatePrayerSettings(
+          PrayerSettings.defaults().copyWith(configured: true),
+        ),
+      );
+      await tester.pumpWidget(const SakeenahApp());
+      await pumpUi(tester);
+
+      expect(find.text('Home'), findsWidgets);
+      expect(
+        Directionality.of(tester.element(find.text('Home').last)),
+        TextDirection.ltr,
+      );
+
+      await tester.pumpWidget(const SizedBox.shrink());
+      await AppServices.shutdown();
+      await tester.runAsync(() => directory!.delete(recursive: true));
+      await restoreBaseline();
+      baselineRestored = true;
+    },
+    timeout: const Timeout(Duration(seconds: 30)),
+  );
 
   testWidgets('settings opens and switches the theme', (tester) async {
     tester.view.physicalSize = const Size(900, 3000);

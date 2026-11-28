@@ -134,6 +134,24 @@ abstract class AppLocalizations {
   /// **'الإعدادات'**
   String get settings;
 
+  /// No description provided for @languageSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللغة'**
+  String get languageSection;
+
+  /// No description provided for @languageArabic.
+  ///
+  /// In ar, this message translates to:
+  /// **'العربية'**
+  String get languageArabic;
+
+  /// No description provided for @languageEnglish.
+  ///
+  /// In ar, this message translates to:
+  /// **'English'**
+  String get languageEnglish;
+
   /// No description provided for @comingSoon.
   ///
   /// In ar, this message translates to:

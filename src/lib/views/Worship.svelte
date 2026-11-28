@@ -79,14 +79,14 @@
 <div class="fade-in">
   <header class="flex flex-wrap items-start justify-between gap-4">
     <div>
-      <p class="text-[10px] font-bold uppercase tracking-[0.24em] text-gold/80">{i18n.t("app.name")}</p>
-      <h1 class="mt-1 text-2xl font-bold text-cream">{i18n.t("prayer.title")}</h1>
+      <p class="text-[10px] font-bold uppercase tracking-[0.24em] text-accent-ink">{i18n.t("app.name")}</p>
+      <h1 class="mt-1 text-2xl font-bold text-text">{i18n.t("prayer.title")}</h1>
       <p class="mt-1 text-sm text-muted">{i18n.t("prayer.subtitle")}</p>
     </div>
     <button
       type="button"
       onclick={() => nav.go("settings")}
-      class="flex items-center gap-2 rounded-xl border border-line bg-ink-850 px-3 py-2 text-xs text-muted transition-colors hover:border-gold/40 hover:text-gold"
+      class="btn btn-outline"
     >
       <Icon name="settings" size={14} />
       {i18n.t("prayer.openSettings")}
@@ -97,41 +97,40 @@
     <button
       type="button"
       onclick={() => nav.go("settings")}
-      class="mt-4 flex w-full items-center gap-3 rounded-2xl border border-gold/30 bg-gold/[0.06] px-4 py-3 text-start transition-colors hover:border-gold/50"
+      class="mt-4 flex w-full items-center gap-3 rounded-2xl border border-accent/30 bg-accent/5 px-4 py-3 text-start transition-colors hover:border-accent/50"
     >
-      <span class="grid size-9 shrink-0 place-items-center rounded-xl bg-gold/15 text-gold">
+      <span class="grid size-9 shrink-0 place-items-center rounded-xl bg-accent/12 text-accent-ink">
         <Icon name="compass" size={17} />
       </span>
       <span class="min-w-0 flex-1">
-        <span class="block text-sm font-semibold text-cream">{i18n.t("prayer.notConfigured")}</span>
+        <span class="block text-sm font-semibold text-text">{i18n.t("prayer.notConfigured")}</span>
         <span class="mt-0.5 block text-xs text-muted">{i18n.t("settings.prayerHint")}</span>
       </span>
-      <Icon name="chevron" size={16} class="shrink-0 text-gold rtl:rotate-180" />
+      <Icon name="chevron" size={16} class="shrink-0 text-accent-ink rtl:rotate-180" />
     </button>
   {/if}
 
   <NextPrayer showLink={false} showSetup={false} />
 
   {#if worship.error && !day}
-    <div class="mt-6 rounded-2xl border border-line bg-ink-900 px-6 py-10 text-center">
+    <div class="card mt-6 rounded-2xl px-6 py-10 text-center">
       <Icon name="compass" size={26} class="mx-auto text-muted" />
       <p class="mt-3 text-sm text-muted">{i18n.t("prayer.error")}</p>
       <button
         type="button"
         onclick={() => worship.load()}
-        class="mt-4 rounded-lg border border-line px-3 py-1.5 text-xs text-cream hover:border-gold/40 hover:text-gold"
+        class="btn btn-outline mt-4"
       >
         {i18n.t("prayer.retry")}
       </button>
     </div>
   {:else if day}
     <div class="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
-      <section class="rounded-2xl border border-line bg-ink-900/60 p-5">
+      <section class="card rounded-2xl p-5">
         <div class="flex flex-wrap items-center justify-between gap-2">
-          <h2 class="text-sm font-semibold text-cream">{i18n.t("prayer.today")}</h2>
+          <h2 class="text-sm font-semibold text-text">{i18n.t("prayer.today")}</h2>
           <span
-            class="rounded-full border px-2.5 py-1 text-[10px] font-semibold
-                   {complete ? 'border-teal/40 bg-teal/10 text-teal' : 'border-line text-muted'}"
+            class="pill {complete ? 'pill-primary' : ''}"
           >
             {complete
               ? i18n.t("prayer.todayComplete")
@@ -149,9 +148,9 @@
           />
         </div>
 
-        <div class="mt-4 flex items-start justify-between gap-4 rounded-xl border border-line/70 bg-ink-850/50 px-3.5 py-3">
+        <div class="mt-4 flex items-start justify-between gap-4 rounded-xl border border-line bg-canvas/60 px-3.5 py-3">
           <div class="min-w-0">
-            <div class="text-sm text-cream">{i18n.t("prayer.excused")}</div>
+            <div class="text-sm text-text">{i18n.t("prayer.excused")}</div>
             <p class="mt-1 text-[11px] leading-relaxed text-muted">{i18n.t("prayer.excusedHint")}</p>
           </div>
           <button
@@ -162,10 +161,10 @@
             disabled={worship.pending}
             onclick={() => worship.setExcused(!excused)}
             class="relative mt-0.5 h-6 w-11 shrink-0 rounded-full border transition-colors disabled:opacity-50
-                   {excused ? 'border-teal/60 bg-teal/70' : 'border-line bg-ink-800'}"
+                   {excused ? 'border-primary/60 bg-primary/70' : 'border-line bg-raised'}"
           >
             <span
-              class="absolute top-[3px] size-[18px] rounded-full bg-cream shadow transition-all
+              class="absolute top-[3px] size-[18px] rounded-full bg-surface shadow transition-all
                      {excused ? 'start-[22px]' : 'start-[3px]'}"
             ></span>
           </button>
@@ -173,10 +172,10 @@
       </section>
 
       <div class="flex flex-col gap-4">
-        <section class="rounded-2xl border border-line bg-ink-900/60 p-5">
+        <section class="card rounded-2xl p-5">
           <div class="flex items-center justify-between gap-2">
-            <h2 class="flex items-center gap-2 text-sm font-semibold text-cream">
-              <Icon name="flame" size={15} class="text-gold" />
+            <h2 class="flex items-center gap-2 text-sm font-semibold text-text">
+              <Icon name="flame" size={15} class="text-primary" />
               {i18n.t("prayer.streak")}
             </h2>
             <span class="text-[11px] text-muted">
@@ -184,7 +183,7 @@
             </span>
           </div>
 
-          <p class="mt-3 text-2xl font-bold text-cream">{streakLabel}</p>
+          <p class="mt-3 text-2xl font-bold text-text">{streakLabel}</p>
           <p class="mt-1 text-[11px] leading-relaxed text-muted">{i18n.t("prayer.streakHint")}</p>
 
           <div class="mt-4">
@@ -202,20 +201,20 @@
                   }`}
                   class="flex flex-col items-center gap-1 rounded-lg border px-1 py-1.5
                          {entry.excused
-                    ? 'border-teal/40 bg-teal/[0.08]'
+                    ? 'border-primary/30 bg-primary-soft/70'
                     : entry.complete
-                      ? 'border-gold/40 bg-gold/10'
+                      ? 'border-primary/40 bg-primary-soft'
                       : entry.partial
-                        ? 'border-gold/20 bg-gold/[0.03]'
-                        : 'border-line/60 bg-ink-850/40'}
-                         {entry.today ? 'ring-1 ring-gold/40' : ''}"
+                        ? 'border-accent/25 bg-accent/5'
+                        : 'border-line bg-canvas/50'}
+                         {entry.today ? 'ring-1 ring-primary/40' : ''}"
                   title={entry.key}
                 >
                   <span class="text-[9px] text-muted">{entry.weekday}</span>
-                  <span class="text-[11px] font-semibold tabular-nums text-cream">{fmtNumber(entry.day)}</span>
+                  <span class="text-[11px] font-semibold tabular-nums text-text">{fmtNumber(entry.day)}</span>
                   <span
                     class="size-1.5 rounded-full
-                           {entry.excused ? 'bg-teal' : entry.complete ? 'bg-gold' : entry.partial ? 'bg-gold/50' : 'bg-line'}"
+                           {entry.excused ? 'bg-primary' : entry.complete ? 'bg-primary' : entry.partial ? 'bg-accent' : 'bg-line'}"
                   ></span>
                 </div>
               {/each}
@@ -223,10 +222,10 @@
           </div>
         </section>
 
-        <section class="rounded-2xl border border-line bg-ink-900/60 p-5">
+        <section class="card rounded-2xl p-5">
           <div class="flex items-center justify-between gap-2">
-            <h2 class="flex items-center gap-2 text-sm font-semibold text-cream">
-              <Icon name="compass" size={15} class="text-gold" />
+            <h2 class="flex items-center gap-2 text-sm font-semibold text-text">
+              <Icon name="compass" size={15} class="text-primary" />
               {i18n.t("prayer.qibla")}
             </h2>
             <span class="text-[11px] text-muted">
@@ -240,7 +239,7 @@
           </div>
           <div class="mt-4">
             {#if atKaaba}
-              <p class="rounded-xl border border-gold/25 bg-gold/[0.06] px-3 py-4 text-center text-xs leading-relaxed text-gold">
+              <p class="rounded-xl border border-accent/25 bg-accent/5 px-3 py-4 text-center text-xs leading-relaxed text-accent-ink">
                 {i18n.t("prayer.atKaaba")}
               </p>
             {:else}

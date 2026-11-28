@@ -24,19 +24,19 @@
 <section class={embedded ? "" : "mt-4"}>
   {#if !embedded}
     <div class="flex flex-wrap items-center justify-between gap-2">
-      <h2 class="flex items-center gap-2 text-sm font-semibold text-cream">
-        <Icon name="moon" size={15} class="text-gold" />
+      <h2 class="flex items-center gap-2 text-sm font-semibold text-text">
+        <Icon name="moon" size={15} class="text-primary" />
         {i18n.t("adhkar.title")}
       </h2>
       <div class="flex items-center gap-2">
-        <span class="flex items-center gap-1.5 rounded-full border border-gold/25 bg-gold/5 px-2.5 py-1 text-[10px] font-semibold text-gold">
+        <span class="pill pill-accent">
           <Icon name="flame" size={11} />
           {streakLabel}
         </span>
         <button
           type="button"
           onclick={() => nav.go("adhkar")}
-          class="rounded-lg border border-line px-2.5 py-1.5 text-[11px] text-muted transition-colors hover:border-gold/40 hover:text-gold"
+          class="rounded-lg border border-line px-2.5 py-1.5 text-[11px] text-muted transition-colors hover:border-primary/40 hover:text-primary"
         >
           {i18n.t("adhkar.open")}
         </button>
@@ -51,23 +51,23 @@
       <button
         type="button"
         onclick={() => open(entry.category.id)}
-        class="group rounded-2xl border border-line bg-ink-900/60 p-4 text-start transition-colors hover:border-gold/35"
+        class="group rounded-2xl border border-line bg-surface p-4 text-start shadow-card transition-colors hover:border-primary/35"
       >
         <div class="flex items-center justify-between gap-3">
-          <span class="grid size-9 shrink-0 place-items-center rounded-xl bg-gold/10 text-gold">
+          <span class="grid size-9 shrink-0 place-items-center rounded-xl bg-accent/10 text-accent-ink">
             <Icon name={entry.icon as "sun" | "moon"} size={16} />
           </span>
           <span
             class="rounded-full border px-2 py-0.5 text-[10px] font-medium
                    {done
-              ? 'border-teal/40 bg-teal/10 text-teal'
+              ? 'border-primary/35 bg-primary-soft text-primary'
               : 'border-line text-muted'}"
           >
             {done ? i18n.t("adhkar.todayDone") : `${fmtNumber(percent)}%`}
           </span>
         </div>
 
-        <p dir="rtl" lang="ar" class="mt-3 text-sm font-semibold text-cream group-hover:text-gold">
+        <p dir="rtl" lang="ar" class="mt-3 text-sm font-semibold text-text group-hover:text-primary">
           {entry.category.title}
         </p>
         <p class="mt-0.5 text-[10px] text-muted">
@@ -76,9 +76,9 @@
           {i18n.t("adhkar.repeats", { count: fmtNumber(adhkar.totalRepeats(entry.category)) })}
         </p>
 
-        <div class="mt-2.5 h-1.5 overflow-hidden rounded-full bg-ink-800">
+        <div class="mt-2.5 h-1.5 overflow-hidden rounded-full bg-line">
           <div
-            class="h-full rounded-full transition-[width] duration-300 {done ? 'bg-teal' : 'bg-gold'}"
+            class="h-full rounded-full transition-[width] duration-300 {done ? 'bg-primary' : 'bg-accent'}"
             style={`width: ${percent}%`}
           ></div>
         </div>

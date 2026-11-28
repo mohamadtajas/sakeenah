@@ -259,20 +259,20 @@ class _AudioPageState extends State<AudioPage> {
         key: ValueKey('audio-mode-${mode.name}'),
         selected: selected,
         showCheckmark: false,
-        selectedColor: SakeenahColors.gold,
+        selectedColor: scheme.primaryContainer,
         backgroundColor: scheme.surfaceContainerLow,
         side: BorderSide(color: scheme.outline),
         avatar: Icon(
           iconFor(mode),
           size: 17,
-          color: selected ? SakeenahColors.ink : scheme.onSurfaceVariant,
+          color: selected ? scheme.onPrimaryContainer : scheme.onSurfaceVariant,
         ),
         label: Text(
           labelFor(mode),
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: selected ? SakeenahColors.ink : scheme.onSurface,
+            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
           ),
         ),
         onSelected: (_) => _selectMode(mode),

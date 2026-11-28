@@ -5,102 +5,123 @@ import 'package:material_ui/material_ui.dart';
 /// The five brand colours are the owner-supplied palette. The remaining values
 /// are derived tints for states, borders and the dark theme.
 abstract final class SakeenahColors {
-  // Brand
-  static const green = Color(0xFF0F4B35);
-  static const ivory = Color(0xFFF9F8F5);
-  static const gold = Color(0xFFC5A059);
-  static const ink = Color(0xFF12241F);
-  static const sand = Color(0xFFECE7DB);
+  // Alabaster Light
+  static const canvas = Color(0xFFF7F5F0);
+  static const surface = Color(0xFFFFFFFF);
+  static const primary = Color(0xFF145349);
+  static const primarySoft = Color(0xFFE6F0ED);
+  static const accent = Color(0xFFB88E3B);
+  static const accentInk = Color(0xFF6B511A);
+  static const text = Color(0xFF1B2422);
+  static const secondaryText = Color(0xFF5A6864);
+  static const border = Color(0xFFE5E0D5);
 
-  // Derived light
-  static const greenDark = Color(0xFF0A3527);
-  static const greenSoft = Color(0xFFDDE8E2);
-  static const goldSoft = Color(0xFFF3E8D2);
-  static const goldInk = Color(0xFF6B511A);
-  static const muted = Color(0xFF5A665F);
-  static const line = Color(0xFFD9D2C3);
+  // Sanctuary dark (derived, not a pure inversion).
+  static const darkCanvas = Color(0xFF0C1512);
+  static const darkSurface = Color(0xFF13211D);
+  static const darkRaised = Color(0xFF1A2B26);
+  static const darkPrimary = Color(0xFF7FC3B2);
+  static const darkPrimarySoft = Color(0xFF1D332C);
+  static const darkAccent = Color(0xFFD4AF63);
+  static const darkText = Color(0xFFF4F1E8);
+  static const darkSecondaryText = Color(0xFFA8B5AF);
+  static const darkBorder = Color(0xFF2A3B35);
+
+  // Compatibility aliases for feature widgets; migrate callers to semantic
+  // ColorScheme values when those widgets are touched.
+  static const green = primary;
+  static const ivory = canvas;
+  static const gold = accent;
+  static const ink = text;
+  static const sand = primarySoft;
+  static const greenDark = primary;
+  static const greenSoft = primarySoft;
+  static const goldSoft = Color(0xFFF2E8D2);
+  static const goldInk = accentInk;
+  static const muted = secondaryText;
+  static const line = border;
+
+  // Legacy dark aliases.
+  static const night = darkCanvas;
+  static const nightSurface = darkSurface;
+  static const nightRaised = darkRaised;
+  static const nightLine = darkBorder;
+  static const nightMuted = darkSecondaryText;
+  static const nightError = Color(0xFFFFB4AB);
   static const error = Color(0xFFB3261E);
   static const errorSoft = Color(0xFFF9DEDC);
-
-  // Derived dark
-  static const night = Color(0xFF08120E);
-  static const nightSurface = Color(0xFF0F201A);
-  static const nightRaised = Color(0xFF172C25);
-  static const nightLine = Color(0xFF29433B);
-  static const nightMuted = Color(0xFFA6B5AD);
-  static const nightError = Color(0xFFFFB4AB);
 }
 
 abstract final class SakeenahTheme {
   static ThemeData dark() {
     final scheme =
         ColorScheme.fromSeed(
-          seedColor: SakeenahColors.gold,
+          seedColor: SakeenahColors.darkPrimary,
           brightness: Brightness.dark,
         ).copyWith(
-          primary: SakeenahColors.gold,
-          onPrimary: SakeenahColors.ink,
-          primaryContainer: SakeenahColors.nightRaised,
-          onPrimaryContainer: SakeenahColors.goldSoft,
-          secondary: SakeenahColors.greenSoft,
-          onSecondary: SakeenahColors.greenDark,
-          secondaryContainer: SakeenahColors.nightRaised,
-          onSecondaryContainer: SakeenahColors.ivory,
-          surface: SakeenahColors.nightSurface,
-          onSurface: SakeenahColors.ivory,
-          surfaceContainerLowest: SakeenahColors.night,
-          surfaceContainerLow: SakeenahColors.nightSurface,
-          surfaceContainer: SakeenahColors.nightRaised,
-          surfaceContainerHigh: const Color(0xFF1D352C),
-          surfaceContainerHighest: const Color(0xFF244036),
-          onSurfaceVariant: SakeenahColors.nightMuted,
-          outline: SakeenahColors.nightLine,
-          outlineVariant: SakeenahColors.nightRaised,
+          primary: SakeenahColors.darkPrimary,
+          onPrimary: SakeenahColors.darkCanvas,
+          primaryContainer: SakeenahColors.darkPrimarySoft,
+          onPrimaryContainer: SakeenahColors.darkText,
+          secondary: SakeenahColors.darkAccent,
+          onSecondary: SakeenahColors.darkCanvas,
+          secondaryContainer: SakeenahColors.darkRaised,
+          onSecondaryContainer: SakeenahColors.darkAccent,
+          surface: SakeenahColors.darkSurface,
+          onSurface: SakeenahColors.darkText,
+          surfaceContainerLowest: SakeenahColors.darkCanvas,
+          surfaceContainerLow: SakeenahColors.darkSurface,
+          surfaceContainer: SakeenahColors.darkRaised,
+          surfaceContainerHigh: const Color(0xFF223831),
+          surfaceContainerHighest: const Color(0xFF2A4038),
+          onSurfaceVariant: SakeenahColors.darkSecondaryText,
+          outline: SakeenahColors.darkBorder,
+          outlineVariant: SakeenahColors.darkRaised,
           error: SakeenahColors.nightError,
           onError: const Color(0xFF690005),
         );
     return _base(
       scheme: scheme,
-      scaffold: SakeenahColors.night,
-      card: SakeenahColors.nightSurface,
-      bar: SakeenahColors.nightSurface,
-      gold: true,
+      scaffold: SakeenahColors.darkCanvas,
+      card: SakeenahColors.darkSurface,
+      bar: SakeenahColors.darkSurface,
+      dark: true,
     );
   }
 
   static ThemeData light() {
     final scheme =
         ColorScheme.fromSeed(
-          seedColor: SakeenahColors.green,
+          seedColor: SakeenahColors.primary,
           brightness: Brightness.light,
         ).copyWith(
-          primary: SakeenahColors.green,
-          onPrimary: SakeenahColors.ivory,
-          primaryContainer: SakeenahColors.greenSoft,
-          onPrimaryContainer: SakeenahColors.greenDark,
-          secondary: SakeenahColors.gold,
-          onSecondary: SakeenahColors.ink,
-          secondaryContainer: SakeenahColors.goldSoft,
-          onSecondaryContainer: SakeenahColors.goldInk,
-          surface: SakeenahColors.ivory,
-          onSurface: SakeenahColors.ink,
-          surfaceContainerLowest: const Color(0xFFFFFFFF),
-          surfaceContainerLow: const Color(0xFFF5F2EA),
-          surfaceContainer: SakeenahColors.sand,
-          surfaceContainerHigh: const Color(0xFFE4DED0),
-          surfaceContainerHighest: const Color(0xFFDCD5C6),
-          onSurfaceVariant: SakeenahColors.muted,
-          outline: SakeenahColors.line,
-          outlineVariant: SakeenahColors.sand,
+          primary: SakeenahColors.primary,
+          onPrimary: SakeenahColors.surface,
+          primaryContainer: SakeenahColors.primarySoft,
+          onPrimaryContainer: SakeenahColors.primary,
+          secondary: SakeenahColors.accent,
+          onSecondary: SakeenahColors.text,
+          secondaryContainer: const Color(0xFFF2E8D2),
+          onSecondaryContainer: SakeenahColors.accentInk,
+          surface: SakeenahColors.surface,
+          onSurface: SakeenahColors.text,
+          surfaceContainerLowest: SakeenahColors.surface,
+          surfaceContainerLow: SakeenahColors.surface,
+          surfaceContainer: SakeenahColors.canvas,
+          surfaceContainerHigh: SakeenahColors.primarySoft,
+          surfaceContainerHighest: const Color(0xFFD7E7E2),
+          onSurfaceVariant: SakeenahColors.secondaryText,
+          outline: SakeenahColors.border,
+          outlineVariant: SakeenahColors.primarySoft,
           error: SakeenahColors.error,
-          onError: Colors.white,
+          onError: SakeenahColors.surface,
         );
     return _base(
       scheme: scheme,
-      scaffold: SakeenahColors.ivory,
-      card: SakeenahColors.sand,
-      bar: SakeenahColors.ivory,
-      gold: false,
+      scaffold: SakeenahColors.canvas,
+      card: SakeenahColors.surface,
+      bar: SakeenahColors.canvas,
+      dark: false,
     );
   }
 
@@ -109,7 +130,7 @@ abstract final class SakeenahTheme {
     required Color scaffold,
     required Color card,
     required Color bar,
-    required bool gold,
+    required bool dark,
   }) {
     final base = ThemeData(
       useMaterial3: true,
@@ -118,19 +139,20 @@ abstract final class SakeenahTheme {
       fontFamily: 'Tajawal',
     );
     final primary = scheme.primary;
-    final selectedFill = SakeenahColors.gold;
+    final accent = dark ? SakeenahColors.darkAccent : SakeenahColors.accent;
+    final selectedFill = scheme.primaryContainer;
     return base.copyWith(
       appBarTheme: AppBarTheme(
-        backgroundColor: SakeenahColors.green,
-        foregroundColor: SakeenahColors.ivory,
+        backgroundColor: bar,
+        foregroundColor: scheme.onSurface,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        iconTheme: const IconThemeData(color: SakeenahColors.ivory),
+        iconTheme: IconThemeData(color: scheme.onSurface),
         titleTextStyle: base.textTheme.titleLarge?.copyWith(
           fontFamily: 'Tajawal',
           fontWeight: FontWeight.w700,
-          color: SakeenahColors.ivory,
+          color: scheme.onSurface,
         ),
       ),
       cardTheme: CardThemeData(
@@ -139,14 +161,14 @@ abstract final class SakeenahTheme {
         elevation: 0,
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(16),
           side: BorderSide(color: scheme.outline),
         ),
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: bar,
         surfaceTintColor: Colors.transparent,
-        indicatorColor: SakeenahColors.gold.withValues(alpha: 0.22),
+        indicatorColor: selectedFill,
         labelTextStyle: WidgetStateProperty.resolveWith(
           (states) => base.textTheme.labelMedium?.copyWith(
             fontFamily: 'Tajawal',
@@ -154,14 +176,14 @@ abstract final class SakeenahTheme {
                 ? FontWeight.w700
                 : FontWeight.w400,
             color: states.contains(WidgetState.selected)
-                ? (gold ? SakeenahColors.gold : SakeenahColors.goldInk)
+                ? scheme.onPrimaryContainer
                 : scheme.onSurfaceVariant,
           ),
         ),
         iconTheme: WidgetStateProperty.resolveWith(
           (states) => IconThemeData(
             color: states.contains(WidgetState.selected)
-                ? (gold ? SakeenahColors.gold : SakeenahColors.goldInk)
+                ? scheme.onPrimaryContainer
                 : scheme.onSurfaceVariant,
           ),
         ),
@@ -177,13 +199,13 @@ abstract final class SakeenahTheme {
           ),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(12),
           ),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: gold ? SakeenahColors.gold : SakeenahColors.green,
+          foregroundColor: primary,
           textStyle: const TextStyle(
             fontFamily: 'Tajawal',
             fontWeight: FontWeight.w600,
@@ -195,53 +217,50 @@ abstract final class SakeenahTheme {
           foregroundColor: scheme.onSurface,
           side: BorderSide(color: scheme.outline),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(12),
           ),
         ),
       ),
       switchTheme: SwitchThemeData(
         thumbColor: WidgetStateProperty.resolveWith(
-          (states) => states.contains(WidgetState.selected)
-              ? SakeenahColors.gold
-              : scheme.outline,
+          (states) =>
+              states.contains(WidgetState.selected) ? primary : scheme.outline,
         ),
         trackColor: WidgetStateProperty.resolveWith(
           (states) => states.contains(WidgetState.selected)
-              ? SakeenahColors.gold.withValues(alpha: 0.35)
+              ? scheme.primaryContainer
               : scheme.surfaceContainerHigh,
         ),
         trackOutlineColor: WidgetStateProperty.resolveWith(
-          (states) => states.contains(WidgetState.selected)
-              ? SakeenahColors.gold
-              : scheme.outline,
+          (states) =>
+              states.contains(WidgetState.selected) ? primary : scheme.outline,
         ),
       ),
       checkboxTheme: CheckboxThemeData(
         fillColor: WidgetStateProperty.resolveWith(
           (states) => states.contains(WidgetState.selected)
-              ? SakeenahColors.gold
+              ? primary
               : Colors.transparent,
         ),
-        checkColor: const WidgetStatePropertyAll(SakeenahColors.ink),
+        checkColor: WidgetStatePropertyAll(scheme.onPrimary),
         side: BorderSide(color: scheme.outline),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       ),
       radioTheme: RadioThemeData(
         fillColor: WidgetStateProperty.resolveWith(
-          (states) => states.contains(WidgetState.selected)
-              ? SakeenahColors.gold
-              : scheme.outline,
+          (states) =>
+              states.contains(WidgetState.selected) ? primary : scheme.outline,
         ),
       ),
       sliderTheme: SliderThemeData(
-        activeTrackColor: SakeenahColors.gold,
+        activeTrackColor: accent,
         inactiveTrackColor: scheme.outline,
-        thumbColor: SakeenahColors.gold,
-        overlayColor: SakeenahColors.gold.withValues(alpha: 0.16),
+        thumbColor: accent,
+        overlayColor: accent.withValues(alpha: 0.16),
         trackHeight: 4,
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
-        color: SakeenahColors.gold,
+        color: accent,
         linearTrackColor: scheme.outlineVariant,
         circularTrackColor: scheme.outlineVariant,
       ),
@@ -254,13 +273,13 @@ abstract final class SakeenahTheme {
           ),
           foregroundColor: WidgetStateProperty.resolveWith(
             (states) => states.contains(WidgetState.selected)
-                ? SakeenahColors.ink
+                ? scheme.onPrimaryContainer
                 : scheme.onSurface,
           ),
           side: WidgetStatePropertyAll(BorderSide(color: scheme.outline)),
           iconColor: WidgetStateProperty.resolveWith(
             (states) => states.contains(WidgetState.selected)
-                ? SakeenahColors.ink
+                ? scheme.onPrimaryContainer
                 : scheme.onSurfaceVariant,
           ),
           textStyle: const WidgetStatePropertyAll(
@@ -270,11 +289,11 @@ abstract final class SakeenahTheme {
       ),
       chipTheme: ChipThemeData(
         backgroundColor: scheme.surfaceContainerLow,
-        selectedColor: SakeenahColors.gold,
+        selectedColor: selectedFill,
         labelStyle: TextStyle(fontSize: 11, color: scheme.onSurface),
-        secondaryLabelStyle: const TextStyle(
+        secondaryLabelStyle: TextStyle(
           fontSize: 11,
-          color: SakeenahColors.ink,
+          color: scheme.onPrimaryContainer,
         ),
         side: BorderSide(color: scheme.outline),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
@@ -287,25 +306,25 @@ abstract final class SakeenahTheme {
         prefixIconColor: scheme.onSurfaceVariant,
         suffixIconColor: scheme.onSurfaceVariant,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: scheme.outline),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: scheme.outline),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(color: SakeenahColors.gold, width: 1.6),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: primary, width: 1.6),
         ),
       ),
       snackBarTheme: SnackBarThemeData(
-        backgroundColor: SakeenahColors.ink,
-        contentTextStyle: const TextStyle(
+        backgroundColor: scheme.onSurface,
+        contentTextStyle: TextStyle(
           fontFamily: 'Tajawal',
-          color: SakeenahColors.ivory,
+          color: scheme.surface,
         ),
-        actionTextColor: SakeenahColors.gold,
+        actionTextColor: accent,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       ),
@@ -317,14 +336,14 @@ abstract final class SakeenahTheme {
         ),
       ),
       dialogTheme: DialogThemeData(
-        backgroundColor: scaffold,
+        backgroundColor: card,
         surfaceTintColor: Colors.transparent,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
       tabBarTheme: TabBarThemeData(
-        labelColor: gold ? SakeenahColors.gold : SakeenahColors.green,
+        labelColor: primary,
         unselectedLabelColor: scheme.onSurfaceVariant,
-        indicatorColor: SakeenahColors.gold,
+        indicatorColor: accent,
         indicatorSize: TabBarIndicatorSize.label,
         labelStyle: const TextStyle(
           fontFamily: 'Tajawal',
@@ -332,8 +351,8 @@ abstract final class SakeenahTheme {
         ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: SakeenahColors.gold,
-        foregroundColor: SakeenahColors.ink,
+        backgroundColor: primary,
+        foregroundColor: scheme.onPrimary,
         elevation: 2,
       ),
       listTileTheme: ListTileThemeData(
@@ -342,12 +361,12 @@ abstract final class SakeenahTheme {
       ),
       tooltipTheme: TooltipThemeData(
         decoration: BoxDecoration(
-          color: SakeenahColors.ink,
+          color: scheme.onSurface,
           borderRadius: BorderRadius.circular(8),
         ),
-        textStyle: const TextStyle(
+        textStyle: TextStyle(
           fontFamily: 'Tajawal',
-          color: SakeenahColors.ivory,
+          color: scheme.surface,
           fontSize: 11,
         ),
       ),
@@ -361,5 +380,5 @@ abstract final class SakeenahTheme {
 
   /// Large Quran text uses the dedicated Amiri Quran face.
   static TextStyle quran(TextStyle base, {double size = 28}) =>
-      base.copyWith(fontFamily: 'AmiriQuran', fontSize: size, height: 1.9);
+      base.copyWith(fontFamily: 'AmiriQuran', fontSize: size, height: 2.1);
 }

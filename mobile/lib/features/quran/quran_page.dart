@@ -339,7 +339,8 @@ class _MushafPageState extends State<MushafPage>
           const SizedBox(height: 14),
           Card(
             child: InkWell(
-              borderRadius: BorderRadius.circular(12),
+              key: const ValueKey('quran-daily-ayah-card'),
+              borderRadius: BorderRadius.circular(16),
               onTap: () {
                 final surah = _surahById[daily.surah];
                 if (surah != null) {

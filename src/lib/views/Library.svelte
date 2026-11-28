@@ -239,14 +239,14 @@
 </script>
 
 {#snippet emptyState(icon: IconName, text: string)}
-  <div class="rounded-2xl border border-line bg-ink-900/50 px-6 py-14 text-center">
-    <Icon name={icon} size={28} class="mx-auto text-ink-700" />
+  <div class="card rounded-2xl px-6 py-14 text-center">
+    <Icon name={icon} size={28} class="mx-auto text-muted" />
     <p class="mt-3 text-sm text-muted">{text}</p>
   </div>
 {/snippet}
 
 {#snippet trackList(tracks: Track[], onRemove?: (track: Track) => void)}
-  <div class="overflow-hidden rounded-2xl border border-line bg-ink-900/50 p-1.5">
+  <div class="card overflow-hidden rounded-2xl p-1.5">
     {#each tracks as track (track.id)}
       <TrackRow {track} queue={tracks} onRemove={onRemove ? () => onRemove(track) : undefined} />
     {/each}
@@ -255,12 +255,12 @@
 
 <div class="fade-in">
   {#if loadError || library.error}
-    <div class="mb-4 rounded-2xl border border-gold/30 bg-gold/[0.05] px-4 py-3 text-xs text-muted">
+    <div class="mb-4 rounded-2xl border border-accent/30 bg-accent/5 px-4 py-3 text-xs text-muted">
       {i18n.t("common.offline")}
       <button
         type="button"
         onclick={() => loadLibrary()}
-        class="ms-2 rounded-md border border-gold/40 px-2 py-0.5 text-gold"
+        class="ms-2 rounded-md border border-accent/40 px-2 py-0.5 text-accent-ink"
       >
         {i18n.t("common.retry")}
       </button>
@@ -271,7 +271,7 @@
     <button
       type="button"
       onclick={() => nav.go("library")}
-      class="mb-5 flex items-center gap-1.5 text-xs text-muted transition-colors hover:text-gold"
+      class="mb-5 flex items-center gap-1.5 text-xs text-muted transition-colors hover:text-primary"
     >
       <Icon name="chevron" size={13} class="rotate-180 rtl:rotate-0" />
       {i18n.t("library.playlists")}
@@ -284,17 +284,17 @@
             <input
               bind:value={renameValue}
               aria-label={i18n.t("library.rename")}
-              class="w-full max-w-sm rounded-lg border border-gold/40 bg-ink-850 px-3 py-1.5 text-xl font-bold text-cream focus:outline-none"
+              class="w-full max-w-sm rounded-lg border border-primary/40 bg-surface px-3 py-1.5 text-xl font-bold text-text focus:outline-none"
             />
-            <button type="submit" class="rounded-lg bg-gold px-3 py-1.5 text-xs font-semibold text-ink-950">
+            <button type="submit" class="btn btn-primary min-h-0 rounded-lg px-3 py-1.5 text-xs">
               {i18n.t("library.create")}
             </button>
           </form>
         {:else}
-          <p class="text-[10px] font-bold uppercase tracking-[0.22em] text-gold/80">
+          <p class="text-[10px] font-bold uppercase tracking-[0.22em] text-accent-ink">
             {i18n.t("library.playlists")}
           </p>
-          <h1 class="mt-1 text-2xl font-bold text-cream">{openPlaylist.name}</h1>
+          <h1 class="mt-1 text-2xl font-bold text-text">{openPlaylist.name}</h1>
         {/if}
         <p class="mt-1 text-xs text-muted">
           {fmtNumber(playlistTracks.length)} {i18n.t("library.tracks")}
@@ -306,7 +306,7 @@
           type="button"
           onclick={() => playAll(playlistTracks)}
           disabled={!playlistTracks.length}
-          class="flex items-center gap-2 rounded-xl bg-gold px-4 py-2.5 text-sm font-semibold text-ink-950 transition-transform hover:scale-[1.02] active:scale-95 disabled:opacity-40"
+          class="btn btn-primary"
         >
           <Icon name="play" size={14} />
           {i18n.t("library.playAll")}
@@ -317,7 +317,7 @@
             renameValue = openPlaylist.name;
             renaming = true;
           }}
-          class="rounded-lg border border-line p-2 text-muted transition-colors hover:text-cream"
+          class="rounded-lg border border-line p-2 text-muted transition-colors hover:border-primary/40 hover:text-primary"
           aria-label={i18n.t("library.rename")}
         >
           <Icon name="pencil" size={15} />
@@ -338,8 +338,8 @@
         <div class="space-y-1">
           {#each Array(6) as _, i (i)}
             <div class="flex animate-pulse items-center gap-3 px-2.5 py-2">
-              <div class="size-11 rounded-lg bg-ink-800"></div>
-              <div class="h-3 w-56 rounded bg-ink-800"></div>
+              <div class="size-11 rounded-lg bg-primary-soft"></div>
+              <div class="h-3 w-56 rounded bg-primary-soft"></div>
             </div>
           {/each}
         </div>
@@ -351,7 +351,7 @@
     </div>
   {:else}
     <header>
-      <h1 class="text-2xl font-bold text-cream">{i18n.t("library.title")}</h1>
+      <h1 class="text-2xl font-bold text-text">{i18n.t("library.title")}</h1>
     </header>
 
     <div class="mt-5 flex flex-wrap gap-2">
@@ -361,8 +361,8 @@
           onclick={() => (tab = t.id)}
           class="flex items-center gap-2 rounded-xl border px-3 py-2 text-[12px] transition-colors
                  {tab === t.id
-            ? 'border-gold/45 bg-gold/10 text-gold'
-            : 'border-line text-muted hover:border-gold/25 hover:text-cream'}"
+            ? 'border-primary/35 bg-primary-soft font-semibold text-primary'
+            : 'border-line text-muted hover:border-primary/25 hover:text-text'}"
         >
           <Icon name={t.icon} size={14} />
           {i18n.t(t.label)}
@@ -376,8 +376,8 @@
           <div class="space-y-1">
             {#each Array(8) as _, i (i)}
               <div class="flex animate-pulse items-center gap-3 px-2.5 py-2">
-                <div class="size-11 rounded-lg bg-ink-800"></div>
-                <div class="h-3 w-56 rounded bg-ink-800"></div>
+                <div class="size-11 rounded-lg bg-primary-soft"></div>
+                <div class="h-3 w-56 rounded bg-primary-soft"></div>
               </div>
             {/each}
           </div>
@@ -398,12 +398,12 @@
             bind:value={newPlaylistName}
             aria-label={i18n.t("library.playlistName")}
             placeholder={i18n.t("library.playlistName")}
-            class="min-w-0 flex-1 rounded-xl border border-line bg-ink-850 px-3 py-2 text-sm text-cream placeholder:text-muted/70 focus:border-gold/50 focus:outline-none"
+            class="min-w-0 flex-1 rounded-xl border border-line bg-surface px-3 py-2 text-sm text-text placeholder:text-muted/70 focus:border-primary/60 focus:outline-none"
           />
           <button
             type="submit"
             disabled={!newPlaylistName.trim() || creating}
-            class="flex items-center gap-1.5 rounded-xl border border-gold/40 bg-gold/10 px-3 py-2 text-xs font-semibold text-gold disabled:opacity-40"
+            class="flex items-center gap-1.5 rounded-xl border border-primary/40 bg-primary-soft px-3 py-2 text-xs font-semibold text-primary disabled:opacity-40"
           >
             <Icon name="list" size={13} />
             {i18n.t("library.newPlaylist")}
@@ -413,10 +413,10 @@
         {#if library.playlists.length === 0}
           {@render emptyState("list", i18n.t("library.emptyPlaylists"))}
         {:else}
-          <div class="overflow-hidden rounded-2xl border border-line bg-ink-900/50">
+          <div class="card overflow-hidden rounded-2xl">
             {#each library.playlists as playlist (playlist.id)}
               <div
-                class="group flex items-center gap-3 border-b border-line/50 px-4 py-3 last:border-0 transition-colors hover:bg-ink-800/60"
+                class="group flex items-center gap-3 border-b border-line/50 px-4 py-3 last:border-0 transition-colors hover:bg-primary-soft/35"
               >
                 <button
                   type="button"
@@ -424,12 +424,12 @@
                   class="flex min-w-0 flex-1 items-center gap-3 text-start"
                 >
                   <span
-                    class="grid size-10 shrink-0 place-items-center rounded-xl border border-line text-gold/80 group-hover:border-gold/30"
+                    class="grid size-10 shrink-0 place-items-center rounded-xl border border-line text-primary group-hover:border-primary/30"
                   >
                     <Icon name="list" size={16} />
                   </span>
                   <span class="min-w-0">
-                    <span class="block truncate text-sm font-medium text-cream group-hover:text-gold">
+                    <span class="block truncate text-sm font-medium text-text group-hover:text-primary">
                       {playlist.name}
                     </span>
                     <span class="block text-[11px] text-muted">
@@ -449,13 +449,13 @@
       {:else if tab === "downloads"}
         {#if library.storage}
           {@const st = library.storage}
-          <div class="mb-4 rounded-2xl border border-line bg-ink-900/50 p-4">
+          <div class="card mb-4 rounded-2xl p-4">
             <div class="flex flex-wrap items-center gap-4">
               <div class="min-w-0 flex-1">
-                <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-gold/80">
+                <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-accent-ink">
                   {i18n.t("library.storage")}
                 </p>
-                <p class="mt-1 text-xl font-bold text-cream">
+                <p class="mt-1 text-xl font-bold text-text">
                   {fmtBytes(st.totalBytes) || "0 KB"}
                 </p>
                 <div class="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-muted">
@@ -467,7 +467,7 @@
                     <span>{i18n.t("library.storageLocal")}: {fmtBytes(st.localBytes)}</span>
                   {/if}
                   {#if st.active}
-                    <span class="text-gold">{i18n.t("library.storageActive")}: {fmtNumber(st.active)}</span>
+                    <span class="text-accent-ink">{i18n.t("library.storageActive")}: {fmtNumber(st.active)}</span>
                   {/if}
                   {#if st.queued}
                     <span>{i18n.t("library.storageQueued")}: {fmtNumber(st.queued)}</span>
@@ -488,7 +488,7 @@
                   <button
                     type="button"
                     onclick={toggleSelectAll}
-                    class="rounded-lg border border-line px-2.5 py-1.5 text-[11px] text-muted transition-colors hover:border-gold/40 hover:text-gold"
+                    class="rounded-lg border border-line px-2.5 py-1.5 text-[11px] text-muted transition-colors hover:border-primary/40 hover:text-primary"
                   >
                     {i18n.t(allSelected ? "library.deselectAll" : "library.selectAll")}
                   </button>
@@ -511,7 +511,7 @@
         {#if library.downloads.length === 0}
           {@render emptyState("download", i18n.t("library.emptyDownloads"))}
         {:else}
-          <div class="overflow-hidden rounded-2xl border border-line bg-ink-900/50">
+          <div class="card overflow-hidden rounded-2xl">
             {#each library.downloads as row (row.track.id)}
               {@const busy = row.status === "queued" || row.status === "downloading"}
               {@const pct = row.bytesTotal > 0 ? Math.round((row.bytesDone / row.bytesTotal) * 100) : 0}
@@ -525,8 +525,8 @@
                   onclick={() => toggleSelected(row.track.id)}
                   class="grid size-5 shrink-0 place-items-center rounded-md border transition-colors
                          {picked
-                    ? 'border-gold/50 bg-gold/15 text-gold'
-                    : 'border-line text-transparent hover:border-gold/40'}
+                    ? 'border-primary/50 bg-primary-soft text-primary'
+                    : 'border-line text-transparent hover:border-primary/40'}
                          disabled:opacity-30"
                   aria-label={row.track.title}
                 >
@@ -539,7 +539,7 @@
                     else if (!busy) void library.startDownload(row.track);
                   }}
                   disabled={busy}
-                  class="grid size-10 shrink-0 place-items-center rounded-xl border border-line text-gold disabled:opacity-40"
+                  class="grid size-10 shrink-0 place-items-center rounded-xl border border-line text-primary disabled:opacity-40"
                   aria-label={row.status === "done" ? i18n.t("player.play") : i18n.t("library.retryDownload")}
                 >
                   <Icon
@@ -548,26 +548,26 @@
                   />
                 </button>
                 <div class="min-w-0 flex-1">
-                  <div class="truncate text-sm text-cream">{row.track.title}</div>
+                  <div class="truncate text-sm text-text">{row.track.title}</div>
                   <div class="truncate text-[11px] text-muted">{row.track.artist}</div>
                   {#if busy}
                     <div class="mt-1.5 flex items-center gap-2">
                       <span
-                        class="h-1 flex-1 overflow-hidden rounded-full bg-ink-800"
+                        class="h-1 flex-1 overflow-hidden rounded-full bg-line"
                         role="progressbar"
                         aria-valuemin="0"
                         aria-valuemax="100"
                         aria-valuenow={pct}
                         aria-label={row.track.title}
                       >
-                        <span class="block h-full rounded-full bg-gold transition-[width]" style="width: {pct}%"></span>
+                        <span class="block h-full rounded-full bg-accent transition-[width]" style="width: {pct}%"></span>
                       </span>
                       <span class="shrink-0 text-[10px] tabular-nums text-muted">
                         {row.status === "queued" ? i18n.t("library.storageQueued") : `${pct}%`}
                       </span>
                     </div>
                   {:else if row.status === "done"}
-                    <div class="mt-0.5 text-[10px] text-teal">
+                    <div class="mt-0.5 text-[10px] text-primary">
                       {i18n.t("library.downloaded")}
                       {#if row.bytesTotal} · {fmtBytes(row.bytesTotal)}{/if}
                     </div>
@@ -603,7 +603,7 @@
           <button
             type="button"
             onclick={() => library.importFolders()}
-            class="flex items-center gap-2 rounded-xl border border-gold/40 bg-gold/10 px-3.5 py-2 text-xs font-semibold text-gold transition-colors hover:bg-gold/15"
+            class="flex items-center gap-2 rounded-xl border border-primary/40 bg-primary-soft px-3.5 py-2 text-xs font-semibold text-primary transition-colors hover:bg-primary-soft/70"
           >
             <Icon name="download" size={13} />
             {i18n.t("library.importFolder")}
@@ -622,29 +622,29 @@
         {#if hifzRows.length === 0}
           {@render emptyState("bookmark", i18n.t("library.noHifz"))}
         {:else}
-          <div class="overflow-hidden rounded-2xl border border-line bg-ink-900/50">
+          <div class="card overflow-hidden rounded-2xl">
             {#each hifzRows as { row, surah } (row.surah)}
               {@const pct = surah.ayahs > 0 ? Math.round((row.memorized.length / surah.ayahs) * 100) : 0}
               <button
                 type="button"
                 onclick={() =>
                   nav.go("quran", "ayah", DEFAULT_AYAH_RECITER, surah.number)}
-                class="group flex w-full items-center gap-3 border-b border-line/50 px-4 py-3 text-start transition-colors last:border-0 hover:bg-ink-800/60"
+                class="group flex w-full items-center gap-3 border-b border-line/50 px-4 py-3 text-start transition-colors last:border-0 hover:bg-primary-soft/35"
               >
                 <span
-                  class="grid size-9 shrink-0 place-items-center rounded-lg border border-line text-[11px] tabular-nums text-muted group-hover:border-gold/30 group-hover:text-gold"
+                  class="grid size-9 shrink-0 place-items-center rounded-lg border border-line text-[11px] tabular-nums text-muted group-hover:border-primary/30 group-hover:text-primary"
                 >
                   {fmtNumber(surah.number)}
                 </span>
                 <span class="min-w-0 flex-1">
-                  <span class="block truncate font-quran text-[1.05rem] leading-snug text-cream group-hover:text-gold">
+                  <span class="block truncate font-quran text-[1.05rem] leading-snug text-text group-hover:text-primary">
                     {shortName(surah.name)}
                   </span>
-                  <span class="mt-1 block h-1 w-full max-w-40 overflow-hidden rounded-full bg-ink-800">
-                    <span class="block h-full rounded-full bg-teal" style="width: {pct}%"></span>
+                  <span class="mt-1 block h-1 w-full max-w-40 overflow-hidden rounded-full bg-line">
+                    <span class="block h-full rounded-full bg-accent" style="width: {pct}%"></span>
                   </span>
                 </span>
-                <span class="shrink-0 text-[11px] tabular-nums text-teal">
+                <span class="shrink-0 text-[11px] tabular-nums text-primary">
                   {fmtNumber(row.memorized.length)} / {fmtNumber(surah.ayahs)}
                 </span>
                 <Icon

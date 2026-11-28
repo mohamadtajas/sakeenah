@@ -46,20 +46,20 @@
   <DailyAyah />
 
   <!-- Hero -->
-  <section class="relative mt-4 overflow-hidden rounded-3xl border border-line bg-ink-900 px-7 py-8">
-    <div class="pointer-events-none absolute -end-24 -top-28 size-64 rounded-full bg-gold/[0.07] blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-28 start-10 size-52 rounded-full bg-teal/[0.05] blur-3xl"></div>
+  <section class="card relative mt-4 overflow-hidden rounded-2xl px-7 py-8">
+    <div class="pointer-events-none absolute -end-24 -top-28 size-64 rounded-full bg-accent/[0.07] blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-28 start-10 size-52 rounded-full bg-primary/[0.06] blur-3xl"></div>
     <div class="relative max-w-xl">
-      <p class="text-[10px] font-bold uppercase tracking-[0.24em] text-gold/80">
+      <p class="text-[10px] font-bold uppercase tracking-[0.24em] text-accent-ink">
         {i18n.t("app.tagline")}
       </p>
-      <h1 class="mt-2 pb-1 font-quran text-[2.1rem] leading-[1.35] text-cream">{i18n.t("app.name")}</h1>
+      <h1 class="mt-2 pb-1 font-quran text-[2.1rem] leading-[1.35] text-text">{i18n.t("app.name")}</h1>
       <p class="mt-3 text-sm leading-relaxed text-muted">{i18n.t("home.heroLine")}</p>
       <div class="mt-6 flex flex-wrap gap-2.5">
         <button
           type="button"
           onclick={() => nav.go("quran")}
-          class="flex items-center gap-2 rounded-xl bg-gold px-4 py-2.5 text-sm font-semibold text-ink-950 transition-transform hover:scale-[1.02] active:scale-95"
+          class="btn btn-primary"
         >
           <Icon name="book" size={16} />
           {i18n.t("home.startQuran")}
@@ -67,7 +67,7 @@
         <button
           type="button"
           onclick={() => nav.go("radio")}
-          class="flex items-center gap-2 rounded-xl border border-line bg-ink-850 px-4 py-2.5 text-sm font-medium text-cream transition-colors hover:border-gold/40 hover:text-gold"
+          class="btn btn-outline"
         >
           <Icon name="radio" size={16} />
           {i18n.t("home.startRadio")}
@@ -75,7 +75,7 @@
         <button
           type="button"
           onclick={() => nav.go("explore")}
-          class="flex items-center gap-2 rounded-xl border border-line bg-ink-850 px-4 py-2.5 text-sm font-medium text-cream transition-colors hover:border-gold/40 hover:text-gold"
+          class="btn btn-outline"
         >
           <Icon name="sparkle" size={16} />
           {i18n.t("home.startExplore")}
@@ -85,12 +85,12 @@
   </section>
 
   {#if failed}
-    <div class="mt-10 rounded-2xl border border-line bg-ink-900 px-6 py-10 text-center">
+    <div class="card mt-10 rounded-2xl px-6 py-10 text-center">
       <Icon name="globe" size={26} class="mx-auto text-muted" />
       <p class="mt-3 text-sm text-muted">{i18n.t("common.offline")}</p>
       <button
         type="button"
-        class="mt-4 rounded-lg border border-line px-3 py-1.5 text-xs text-cream hover:border-gold/40"
+        class="btn btn-outline mt-4"
         onclick={() => location.reload()}>{i18n.t("common.retry")}</button
       >
     </div>
@@ -98,9 +98,9 @@
     <div class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
       {#each Array(12) as _, i (i)}
         <div class="animate-pulse">
-          <div class="aspect-square rounded-2xl bg-ink-800"></div>
-          <div class="mt-2 h-3 w-3/4 rounded bg-ink-800"></div>
-          <div class="mt-1.5 h-2.5 w-1/2 rounded bg-ink-800/70"></div>
+          <div class="aspect-square rounded-2xl bg-primary-soft"></div>
+          <div class="mt-2 h-3 w-3/4 rounded bg-primary-soft"></div>
+          <div class="mt-1.5 h-2.5 w-1/2 rounded bg-primary-soft/70"></div>
         </div>
       {/each}
     </div>
@@ -126,15 +126,15 @@
             <button
               type="button"
               onclick={() => playStation(station, quranRadios)}
-              class="group flex items-center gap-3 rounded-xl border border-line/70 bg-ink-850/50 px-3 py-2.5 text-start transition-colors hover:border-gold/30 hover:bg-ink-800"
+              class="group flex items-center gap-3 rounded-xl border border-line bg-surface px-3 py-2.5 text-start shadow-card transition-colors hover:border-primary/35 hover:bg-primary-soft/30"
             >
-              <span class="grid size-9 shrink-0 place-items-center rounded-lg bg-gold/10 text-gold">
+              <span class="grid size-9 shrink-0 place-items-center rounded-lg bg-accent/10 text-accent-ink">
                 <Icon name={station.id === player.current?.id ? "pause" : "radio"} size={15} />
               </span>
-              <span class="min-w-0 flex-1 truncate text-[0.83rem] font-medium group-hover:text-gold">
+              <span class="min-w-0 flex-1 truncate text-[0.83rem] font-medium text-text group-hover:text-primary">
                 {station.title}
               </span>
-              <span class="shrink-0 text-[10px] font-semibold text-teal">{i18n.t("radio.live")}</span>
+              <span class="shrink-0 text-[10px] font-semibold text-primary">{i18n.t("radio.live")}</span>
             </button>
           {/each}
         </div>

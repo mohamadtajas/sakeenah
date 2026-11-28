@@ -86,15 +86,15 @@
       onseek(max);
     }
   }}
-  class="group relative h-2 w-full cursor-pointer touch-none select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950 {disabled
+  class="group relative h-2 w-full cursor-pointer touch-none select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas {disabled
     ? 'pointer-events-none opacity-50'
     : ''} {klass}"
 >
-  <div class="absolute inset-x-0 top-1/2 h-1.5 -translate-y-1/2 overflow-hidden rounded-full bg-ink-700">
-    <div class="h-full rounded-full bg-gold/90" style="width:{pct}%"></div>
+  <div class="absolute inset-x-0 top-1/2 h-1.5 -translate-y-1/2 overflow-hidden rounded-full bg-line">
+    <div class="h-full rounded-full bg-accent" style="width:{pct}%"></div>
   </div>
   <div
-    class="absolute top-1/2 size-3 -translate-y-1/2 rounded-full bg-gold shadow-[0_0_0_3px_rgba(233,185,92,0.18)] transition-opacity {dragging
+    class="absolute top-1/2 size-3 -translate-y-1/2 rounded-full bg-accent ring-4 ring-accent/15 transition-opacity {dragging
       ? 'opacity-100'
       : 'opacity-0 group-hover:opacity-100'}"
     style="inset-inline-start: calc({pct}% - 6px)"

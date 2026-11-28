@@ -17,27 +17,34 @@ class SakeenahApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final services = AppServices.current;
-    return ValueListenableBuilder<ThemeMode>(
-      valueListenable: services.themeMode,
-      builder: (context, mode, _) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
-        locale: const Locale('ar'),
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        theme: SakeenahTheme.light(),
-        darkTheme: SakeenahTheme.dark(),
-        themeMode: mode,
-        home: AppShell(
+    return ValueListenableBuilder<Locale>(
+      valueListenable: services.locale,
+      builder: (context, locale, _) => ValueListenableBuilder<ThemeMode>(
+        valueListenable: services.themeMode,
+        builder: (context, mode, _) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
+          locale: locale,
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          theme: SakeenahTheme.light(),
+          darkTheme: SakeenahTheme.dark(),
           themeMode: mode,
-          onThemeChanged: (next) {
-            unawaited(services.updateThemeMode(next).catchError((_) {}));
-          },
+          home: AppShell(
+            themeMode: mode,
+            locale: locale,
+            onThemeChanged: (next) {
+              unawaited(services.updateThemeMode(next).catchError((_) {}));
+            },
+            onLocaleChanged: (next) {
+              unawaited(services.setLocale(next).catchError((_) {}));
+            },
+          ),
         ),
       ),
     );

@@ -13,6 +13,7 @@ import 'package:sakeenah_mobile/data/worship/adhan_scheduler.dart';
 import 'package:sakeenah_mobile/data/worship/prayer_times_service.dart';
 import 'package:sakeenah_mobile/features/settings/settings_page.dart';
 import 'package:sakeenah_mobile/l10n/app_localizations.dart';
+import 'package:sakeenah_mobile/theme/sakeenah_theme.dart';
 
 import 'support/fake_notification_service.dart';
 
@@ -41,6 +42,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         locale: const Locale('ar'),
+        theme: SakeenahTheme.light(),
         supportedLocales: AppLocalizations.supportedLocales,
         localizationsDelegates: const [
           AppLocalizations.delegate,
@@ -80,6 +82,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         locale: const Locale('ar'),
+        theme: SakeenahTheme.light(),
         supportedLocales: AppLocalizations.supportedLocales,
         localizationsDelegates: const [
           AppLocalizations.delegate,
@@ -175,6 +178,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         locale: const Locale('ar'),
+        theme: SakeenahTheme.light(),
         supportedLocales: AppLocalizations.supportedLocales,
         localizationsDelegates: const [
           AppLocalizations.delegate,
@@ -202,6 +206,11 @@ void main() {
     expect(find.text('CC BY 3.0 — © Tanzil Project'), findsOneWidget);
     expect(find.text('تسجيلات الأذان'), findsOneWidget);
     expect(find.text('CC0 1.0 وملكية عامة'), findsOneWidget);
+    final license = tester.widget<Text>(find.text('CC0 1.0 وملكية عامة'));
+    expect(
+      license.style?.color,
+      SakeenahTheme.light().colorScheme.onSecondaryContainer,
+    );
   });
 
   testWidgets('adhan toggles save and test notification fires', (tester) async {

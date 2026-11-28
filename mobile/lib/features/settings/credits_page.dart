@@ -103,7 +103,7 @@ class CreditsPage extends StatelessWidget {
                       source.license,
                       style: TextStyle(
                         fontSize: 10,
-                        color: scheme.secondary,
+                        color: scheme.onSecondaryContainer,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
